@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class ProximityDetector : MonoBehaviour
 {
+    /*
     public float proximityRadius = 5f;  // The proximity radius for detection
     private bool isPlayerInProximity;   // Whether the player is in proximity or not
 
@@ -42,5 +43,5 @@ public class ProximityDetector : MonoBehaviour
     public bool IsPlayerInProximity()
     {
         return isPlayerInProximity;
-    }
+    }*/
 }

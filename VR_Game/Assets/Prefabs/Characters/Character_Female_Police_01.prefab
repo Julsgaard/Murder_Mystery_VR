@@ -985,9 +985,10 @@ GameObject:
   m_Component:
   - component: {fileID: 9091036668525189114}
   - component: {fileID: 1345958113890821124}
+  - component: {fileID: 5853196048721535670}
   m_Layer: 0
   m_Name: Character_Female_Police_01
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1001,7 +1002,7 @@ Transform:
   m_GameObject: {fileID: 3964531927753237881}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.435444, y: 0.13937378, z: -1.4261864}
+  m_LocalPosition: {x: 16.650549, y: 0.148, z: -2.6143358}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1038,6 +1039,29 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!136 &5853196048721535670
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3964531927753237881}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.2607713
+  m_Height: 1.8334253
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.9157394, z: -0.018519193}
 --- !u!1 &4009565024622923174
 GameObject:
   m_ObjectHideFlags: 0

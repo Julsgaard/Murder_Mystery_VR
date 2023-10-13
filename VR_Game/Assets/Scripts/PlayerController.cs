@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,12 +27,13 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        float horizontalMove = Keyboard.current.aKey.isPressed ? -1 : Keyboard.current.dKey.isPressed ? 1 : 0;
-        float verticalMove = Keyboard.current.wKey.isPressed ? 1 : Keyboard.current.sKey.isPressed ? -1 : 0;
+        Move();
+        Jump();
+        Rotate();
+    }
 
-        Vector3 move = new Vector3(horizontalMove, 0, verticalMove);
-        _moveDirection = transform.TransformDirection(move.normalized) * speed;
-
+    private void Jump()
+    {
         if (characterController.isGrounded)
         {
             verticalSpeed.y = -2f;
@@ -43,7 +46,10 @@ public class PlayerController : MonoBehaviour
         {
             verticalSpeed.y -= gravity * Time.deltaTime;
         }
+    }
 
+    private void Rotate()
+    {
         Vector2 mouseAxis = Mouse.current.delta.ReadValue();
 
         _rotationX -= mouseAxis.y * mouseSensitivity;
@@ -51,7 +57,16 @@ public class PlayerController : MonoBehaviour
 
         cameraHolder.localRotation = Quaternion.Euler(_rotationX, 0, 0);
         characterController.transform.Rotate(0, mouseAxis.x * mouseSensitivity, 0);
+    }
 
+    private void Move()
+    {
+        float horizontalMove = Keyboard.current.aKey.isPressed ? -1 : Keyboard.current.dKey.isPressed ? 1 : 0;
+        float verticalMove = Keyboard.current.wKey.isPressed ? 1 : Keyboard.current.sKey.isPressed ? -1 : 0;
+
+        Vector3 move = new Vector3(horizontalMove, 0, verticalMove);
+        _moveDirection = transform.TransformDirection(move.normalized) * speed;
+        
         Vector3 finalMove = _moveDirection + new Vector3(0, verticalSpeed.y, 0);
         characterController.Move(finalMove * Time.deltaTime);
     }
