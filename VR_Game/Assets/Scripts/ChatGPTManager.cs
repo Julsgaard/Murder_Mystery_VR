@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using OpenAI;
-using UnityEngine.Events;
-using TMPro;
-using System;
-using UnityEngine.UI;
 using LMNT;
+using OpenAI;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class ChatGPTManager : MonoBehaviour             
 {
@@ -14,23 +13,11 @@ public class ChatGPTManager : MonoBehaviour
     public class OnResponseEvent : UnityEvent<string> { }
 
     public OnResponseEvent onResponse;
-    
-
-    [SerializeField] private Button recordButton;
-    [SerializeField] private Image progressBar;
-    [SerializeField] private TMP_InputField message;
-    [SerializeField] private Dropdown dropdown;
 
     public LMNTSpeech speech;
 
 
 
-    private readonly string fileName = "output.wav";
-    private readonly int duration = 5;
-
-    private AudioClip clip;
-    private bool isRecording;
-    private float time;
 
 
 
@@ -38,15 +25,16 @@ public class ChatGPTManager : MonoBehaviour
     //private OpenAIApi openAI = new OpenAIApi("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");
     private List<ChatMessage> messages = new List<ChatMessage>();
 
-    private string GetPrompt()
+    private string GetDefaultPrompt()
     {
         return "Answer the following question as if you were a mediaval peasant, and in no longer than 20 words: ";
     }
 
-    public async void AskChatGPT(string newText)
+    public async void AskChatGPT(string npcPrompt)
     {
         ChatMessage newMessage = new ChatMessage();
-        newMessage.Content = GetPrompt() + newText;
+        //newMessage.Content = GetDefaultPrompt() + npcPrompt;
+        newMessage.Content = npcPrompt;
         newMessage.Role = "user";   
 
         messages.Add(newMessage);   
@@ -65,87 +53,31 @@ public class ChatGPTManager : MonoBehaviour
 
             Debug.Log(chatResponse.Content);
 
-            onResponse.Invoke(chatResponse.Content);
-            speech.dialogue = chatResponse.Content;
-            StartCoroutine(speech.Talk());
+            //onResponse.Invoke(chatResponse.Content);
+
+            //LMNT SPEECH STUFF
+            //speech.dialogue = chatResponse.Content;
+            //StartCoroutine(speech.Talk());
             //responseField.text = chatResponse.Content;
         }
     }
 
-    private void Start()
+    public async Task<string> TranscribeAudioAndGetText(byte[] audio)
     {
-        #if UNITY_WEBGL && !UNITY_EDITOR
-            dropdown.options.Add(new Dropdown.OptionData("Microphone not supported on WebGL"));
-        #else
-        foreach (var device in Microphone.devices)
-        {
-            dropdown.options.Add(new Dropdown.OptionData(device));
-        }
-        recordButton.onClick.AddListener(StartRecording);
-        dropdown.onValueChanged.AddListener(ChangeMicrophone);
-
-        var index = PlayerPrefs.GetInt("user-mic-device-index");
-        dropdown.SetValueWithoutNotify(index);
-        #endif
-    }
-    private void ChangeMicrophone(int index)
-    {
-        PlayerPrefs.SetInt("user-mic-device-index", index);
-    }
-
-    private void StartRecording()
-    {
-        isRecording = true;
-        recordButton.enabled = false;
-
-        var index = PlayerPrefs.GetInt("user-mic-device-index");
-
-        #if !UNITY_WEBGL
-        clip = Microphone.Start(dropdown.options[index].text, false, duration, 44100);
-        #endif
-    }
-
-    private async void EndRecording()
-    {
-        message.text = "Transcribing...";
-        
-        
-        #if !UNITY_WEBGL
-        Microphone.End(null);
-        #endif
-
-        byte[] data = SaveWav.Save(fileName, clip);
-
         var req = new CreateAudioTranscriptionsRequest
         {
-            FileData = new FileData() { Data = data, Name = "audio.wav" },
-            // File = Application.persistentDataPath + "/" + fileName,
+            FileData = new FileData() { Data = audio, Name = "audio.wav" },
             Model = "whisper-1",
             Language = "en"
         };
+
         var res = await openAI.CreateAudioTranscription(req);
 
-        progressBar.fillAmount = 0;
-        message.text = res.Text;
-        recordButton.enabled = true;
-
-        AskChatGPT(res.Text);
+        // Return the transcribed text
+        return res.Text;
     }
-    private void Update()
-    {
-        if (isRecording)
-        {
-            time += Time.deltaTime;
-            progressBar.fillAmount = time / duration;
 
-            if (time >= duration)
-            {
-                time = 0;
-                isRecording = false;
-                EndRecording();
-            }
-        }
-    }
+
 
 
 
