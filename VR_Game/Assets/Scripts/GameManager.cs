@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public string[] availableMicrophones;
     public string selectedMicrophone;
     
+    public Keyboard keyboard;
     
     public ChatGPTManager chatGPTManager;
     
