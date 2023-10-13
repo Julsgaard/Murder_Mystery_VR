@@ -16,7 +16,7 @@ Material:
   - _ENVIRONMENTREFLECTIONS_OFF
   - _SPECULARHIGHLIGHTS_OFF
   m_InvalidKeywords: []
-  m_LightmapFlags: 1
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2000
@@ -118,9 +118,9 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.4191176, g: 0.4191176, b: 0.4191176, a: 1}
-    - _Color: {r: 0.41911757, g: 0.41911757, b: 0.41911757, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _BaseColor: {r: 0.9589641, g: 1, b: 0.6933962, a: 1}
+    - _Color: {r: 0.95896405, g: 1, b: 0.6933962, a: 1}
+    - _EmissionColor: {r: 0.4269758, g: 0.5531809, b: 0.9528302, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &7169979476549928412
