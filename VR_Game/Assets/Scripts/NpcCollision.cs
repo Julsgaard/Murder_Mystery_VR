@@ -5,26 +5,11 @@ using UnityEngine.InputSystem;
 public class NpcCollision : MonoBehaviour
 {
     private bool _isPlayerInProximity;   // Whether the player is in proximity or not
-
-    public GameManager gameManager;
-
-    private void Update()
+    
+    // Returns whether the player is in proximity or not
+    public bool IsPlayerInProximity()
     {
-        if (_isPlayerInProximity)
-        {
-            if (Keyboard.current.eKey.isPressed && gameManager.isRecording != true)
-            {
-                Debug.Log("Player is talking to NPC");
-                
-                gameManager.StartRecording();
-            }
-            
-            if (Keyboard.current.eKey.IsPressed() != true && gameManager.isRecording)
-            {
-                Debug.Log("Done talking");
-                gameManager.EndRecording();
-            }
-        }
+        return _isPlayerInProximity;
     }
     
     private void OnTriggerStay(Collider other)

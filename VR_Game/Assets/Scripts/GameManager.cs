@@ -8,19 +8,7 @@ public class GameManager : MonoBehaviour
     public GameObject nonPlayerObject;
     
     public bool enableVR;
-    public bool isRecording = false;
     
-    public string[] availableMicrophones;
-    public string selectedMicrophone = null;
-    
-    public Keyboard keyboard;
-    
-    public ChatGPTManager chatGPTManager;
-    
-    private Transform parentTransform; 
-    private AudioClip _playerRecording; //Used to store the audio clip recorded by the player before sending it to OpenAI
-
-
     
     // Start is called before the first frame update
     void Start()
@@ -36,9 +24,6 @@ public class GameManager : MonoBehaviour
             GameObject playerObject = nonPlayerObject;
         }
         
-        // Populate availableMicrophones with the names of all available microphones
-        availableMicrophones = Microphone.devices;
-        keyboard = Keyboard.current;
     }
 
     private void EnableVR()
@@ -57,28 +42,5 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    public void StartRecording()
-    {
-        isRecording = true;
-
-        _playerRecording = Microphone.Start(selectedMicrophone,false, 60, 44100);
-
-    }
     
-    public async void EndRecording()
-    {
-        isRecording = false;
-        Microphone.End(selectedMicrophone);
-        
-        AudioClip trimmedAudioClip = SaveWav.TrimSilence(_playerRecording, 0.001f);
-        
-        
-
-        byte[] audio = SaveWav.Save("tempClip", trimmedAudioClip);
-        string transcribedText = await chatGPTManager.TranscribeAudioAndGetText(audio);
-        
-        Debug.Log($"Transcribed text: {transcribedText}");
-
-        chatGPTManager.AskChatGPT(transcribedText);
-    }
 }
