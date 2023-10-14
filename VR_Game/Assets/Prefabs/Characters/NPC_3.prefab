@@ -2079,6 +2079,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8234044696271453428}
   - component: {fileID: 485252138095936730}
+  - component: {fileID: 3208579105357951316}
   - component: {fileID: 1570105744332220357}
   m_Layer: 0
   m_Name: NPC_3
@@ -2134,6 +2135,27 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!135 &3208579105357951316
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6749590316091844605}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 3.5
+  m_Center: {x: 0, y: 1.65, z: 0}
 --- !u!136 &1570105744332220357
 CapsuleCollider:
   m_ObjectHideFlags: 0

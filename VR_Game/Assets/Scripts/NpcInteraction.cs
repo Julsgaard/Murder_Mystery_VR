@@ -9,47 +9,44 @@ public class NpcInteraction : MonoBehaviour
 {
     public NpcCollision npcCollision;
     public ChatGPTManager chatGPTManager;
-    
-    public string[] availableMicrophones;
-    public string selectedMicrophone = null;
+    public GameManager gameManager;
     
     private AudioClip _playerRecording; //Used to store the audio clip recorded by the player before sending it to OpenAI
     public bool isRecording = false;
     
-    //Finds the available microphones and selects the first one (The default)
-    void Start()
-    {
-        availableMicrophones = Microphone.devices;
-        selectedMicrophone = availableMicrophones[0];
-    }
     
-    //Controls the logic whether the recording shuold be started or stopped
+    //Controls the logic whether the recording should be started or stopped
     private void Update()
+    {
+        CheckForPlayerProximity();
+    }
+
+    private void CheckForPlayerProximity()
     {
         if (npcCollision.IsPlayerInProximity()) ;
         {
             if (Keyboard.current.eKey.isPressed && isRecording != true)
             {
-                Debug.Log("Player is talking to NPC");
-                
+                //Debug.Log("Player is talking to NPC");
+
                 StartRecording();
             }
-            
+
             if (Keyboard.current.eKey.IsPressed() != true && isRecording)
             {
-                Debug.Log("Done talking");
+                //Debug.Log("Done talking");
                 EndRecording();
             }
         }
     }
-    
-    
+
+
     //Starts recording the player voice input to be transcribed and sent to OpenAI
     public void StartRecording()
     {
         isRecording = true;
 
-        _playerRecording = Microphone.Start(selectedMicrophone,false, 60, 44100);
+        _playerRecording = Microphone.Start(gameManager.selectedMicrophone,false, 60, 44100);
 
     }
     
@@ -57,13 +54,17 @@ public class NpcInteraction : MonoBehaviour
     public async void EndRecording()
     {
         isRecording = false;
-        Microphone.End(selectedMicrophone);
+        Microphone.End(gameManager.selectedMicrophone);
         
         AudioClip trimmedAudioClip = SaveWav.TrimSilence(_playerRecording, 0.001f);
-        
-        
 
         byte[] audio = SaveWav.Save("tempClip", trimmedAudioClip);
+        
+        // Save to file for debugging
+        //string filePath = Application.dataPath + "/TempAudio.wav";
+        //System.IO.File.WriteAllBytes(filePath, audio);
+
+        
         string transcribedText = await chatGPTManager.TranscribeAudioAndGetText(audio);
         
         Debug.Log($"Transcribed text: {transcribedText}");

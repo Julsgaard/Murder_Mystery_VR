@@ -9,23 +9,25 @@ public class GameManager : MonoBehaviour
     
     public bool enableVR;
     
+    public string[] availableMicrophones;
+    public string selectedMicrophone;
+
+    
     
     // Start is called before the first frame update
     void Start()
     {
+        
+        availableMicrophones = Microphone.devices; // Populate availableMicrophones with the names of all available microphones
+        
+        selectedMicrophone = Microphone.devices[0]; // Select the first microphone in the list of available microphones
+        
         EnableVR();
-        
-        if (enableVR)
-        {
-            GameObject playerObject = vrPlayerObject;
-        }
-        else
-        {
-            GameObject playerObject = nonPlayerObject;
-        }
-        
-    }
 
+        CheckForVrOrNonVrPlayer();
+
+    }
+    
     private void EnableVR()
     {
         // if enableVR is true, then enable the vrPlayerObject and disable the playerObject
@@ -42,5 +44,18 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    
+    private void CheckForVrOrNonVrPlayer()
+    {
+        if (enableVR)
+        {
+            GameObject playerObject = vrPlayerObject;
+        }
+        else
+        {
+            GameObject playerObject = nonPlayerObject;
+        }
+    }
 }
+
+
+
