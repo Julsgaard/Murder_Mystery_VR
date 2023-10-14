@@ -27,7 +27,7 @@ public class ChatGPTManager : MonoBehaviour
 
     private string GetDefaultPrompt()
     {
-        return "Answer the following question as if you were a mediaval peasant, and in no longer than 20 words: ";
+        return "Answer the following question as if you were a medieval peasant, and in no longer than 20 words: ";
     }
 
     public async void AskChatGPT(string npcPrompt)

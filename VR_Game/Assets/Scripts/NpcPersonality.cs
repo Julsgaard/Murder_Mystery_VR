@@ -4,8 +4,23 @@ using UnityEngine;
 
 public class NpcPersonality : MonoBehaviour
 {
-    public string npcBackstory;
+    [SerializeField]
+    private string _backstoryPrompt;
+    [SerializeField]
+    private string _conversationPrompt;
     
+    public string getBackstoryPrompt()
+    {
+        return _backstoryPrompt;
+    }
+    public string getConversationPrompt()
+    {
+        return _conversationPrompt;
+    }
+
+
+
+
 
 
 }

@@ -10,9 +10,11 @@ public class NpcInteraction : MonoBehaviour
     public NpcCollision npcCollision;
     public ChatGPTManager chatGPTManager;
     public GameManager gameManager;
+    public PromptManager promptManager;
     
     private AudioClip _playerRecording; //Used to store the audio clip recorded by the player before sending it to OpenAI
-    public bool isRecording = false;
+    private bool _isRecording = false;
+    private String _combinedPrompt; //The final combined prompt to be sent to openAI
     
     
     //Controls the logic whether the recording should be started or stopped
@@ -25,14 +27,14 @@ public class NpcInteraction : MonoBehaviour
     {
         if (npcCollision.IsPlayerInProximity()) ;
         {
-            if (Keyboard.current.eKey.isPressed && isRecording != true)
+            if (Keyboard.current.eKey.isPressed && _isRecording != true)
             {
                 //Debug.Log("Player is talking to NPC");
 
                 StartRecording();
             }
 
-            if (Keyboard.current.eKey.IsPressed() != true && isRecording)
+            if (Keyboard.current.eKey.IsPressed() != true && _isRecording)
             {
                 //Debug.Log("Done talking");
                 EndRecording();
@@ -44,7 +46,7 @@ public class NpcInteraction : MonoBehaviour
     //Starts recording the player voice input to be transcribed and sent to OpenAI
     public void StartRecording()
     {
-        isRecording = true;
+        _isRecording = true;
 
         _playerRecording = Microphone.Start(gameManager.selectedMicrophone,false, 60, 44100);
 
@@ -53,7 +55,7 @@ public class NpcInteraction : MonoBehaviour
     //Ends the recording, transcribes the audio and sends it to OpenAI
     public async void EndRecording()
     {
-        isRecording = false;
+        _isRecording = false;
         Microphone.End(gameManager.selectedMicrophone);
         
         AudioClip trimmedAudioClip = SaveWav.TrimSilence(_playerRecording, 0.001f);
@@ -68,6 +70,9 @@ public class NpcInteraction : MonoBehaviour
         string transcribedText = await chatGPTManager.TranscribeAudioAndGetText(audio);
         
         Debug.Log($"Transcribed text: {transcribedText}");
+        
+        _combinedPrompt = promptManager.CombinedPrompt(npcCollision.GetCurrentNpc(),transcribedText);
+        //chatGPTManager.AskChatGPT(_combinedPrompt);
 
         chatGPTManager.AskChatGPT(transcribedText);
     }
