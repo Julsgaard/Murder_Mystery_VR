@@ -12,7 +12,7 @@ public class NpcCollision : MonoBehaviour
     {
         if (_isPlayerInProximity)
         {
-            if (Keyboard.current.eKey.isPressed)
+            if (Keyboard.current.eKey.isPressed && gameManager.isRecording != true)
             {
                 Debug.Log("Player is talking to NPC");
                 
@@ -21,10 +21,10 @@ public class NpcCollision : MonoBehaviour
             
             if (Keyboard.current.eKey.IsPressed() != true && gameManager.isRecording)
             {
+                Debug.Log("Done talking");
                 gameManager.EndRecording();
             }
         }
-     
     }
     
     private void OnTriggerStay(Collider other)
@@ -34,34 +34,14 @@ public class NpcCollision : MonoBehaviour
             // Player has entered the proximity
             Debug.Log("Player is in proximity!");
             _isPlayerInProximity = true;
-            
-            
-            /* *********** CAN BE USED TO GET THE NPC THAT THE PLAYER IS LOOKING AT ***********
-            // Define a ray that starts from the player's position and goes forward
-            Ray ray = new Ray(transform.position, transform.forward);
 
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~LayerMask.GetMask("Ignore Raycast"), QueryTriggerInteraction.Ignore))
-            {
-                Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.yellow);
-            
-                // Check if the ray hits an object with the "NPC" tag
-                if (hit.collider.CompareTag("NPC"))
-                {
-                    Debug.Log("Hit an NPC: " + hit.collider.name);
-                    // You can access the specific NPC that was hit using hit.collider
-                    // Example: NPC npc = hit.collider.GetComponent<NPC>();
-                }
-            }
-            else
-            {
-                Debug.DrawRay(transform.position, transform.forward * 1000, Color.white);
-                Debug.Log("Did not Hit");
-            }*/
+
+            //other.gameObject.GetComponent<NpcPersonality>();
+
+
+            //RaycastCollision();
         }
     }
-
-    
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("NPC"))
@@ -70,7 +50,37 @@ public class NpcCollision : MonoBehaviour
             Debug.Log("Player exited the proximity!");
             _isPlayerInProximity = false;
             
-            gameManager.EndRecording();
+            
         }
     }
+
+    private void RaycastCollision()
+    {
+        //*********** CAN BE USED TO GET THE NPC THAT THE PLAYER IS LOOKING AT ***********
+        // Define a ray that starts from the player's position and goes forward
+        Ray ray = new Ray(transform.position, transform.forward);
+
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~LayerMask.GetMask("Ignore Raycast"),
+                QueryTriggerInteraction.Ignore))
+        {
+            Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.yellow);
+
+            // Check if the ray hits an object with the "NPC" tag
+            if (hit.collider.CompareTag("NPC"))
+            {
+                Debug.Log("Hit an NPC: " + hit.collider.name);
+                // You can access the specific NPC that was hit using hit.collider
+                // Example: NPC npc = hit.collider.GetComponent<NPC>();
+            }
+        }
+        else
+        {
+            Debug.DrawRay(transform.position, transform.forward * 1000, Color.white);
+            Debug.Log("Did not Hit");
+        }
+    }
+
+
+    
 }

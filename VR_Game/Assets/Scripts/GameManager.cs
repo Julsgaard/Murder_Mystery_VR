@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public bool isRecording = false;
     
     public string[] availableMicrophones;
-    public string selectedMicrophone;
+    public string selectedMicrophone = null;
     
     public Keyboard keyboard;
     
@@ -68,11 +68,16 @@ public class GameManager : MonoBehaviour
     public async void EndRecording()
     {
         isRecording = false;
-
         Microphone.End(selectedMicrophone);
+        
+        AudioClip trimmedAudioClip = SaveWav.TrimSilence(_playerRecording, 0.001f);
+        
+        
 
-        byte[] audio = SaveWav.Save("tempClip", _playerRecording);
+        byte[] audio = SaveWav.Save("tempClip", trimmedAudioClip);
         string transcribedText = await chatGPTManager.TranscribeAudioAndGetText(audio);
+        
+        Debug.Log($"Transcribed text: {transcribedText}");
 
         chatGPTManager.AskChatGPT(transcribedText);
     }
