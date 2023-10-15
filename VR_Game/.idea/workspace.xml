@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="de17f7f6-3b1a-4de5-b38a-b388700bdbc2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Assets/Imports/PolygonHorrorMansion/Prefabs/Buildings/SM_Bld_Architrave_01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Imports/PolygonHorrorMansion/Prefabs/Buildings/SM_Bld_Architrave_01.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Imports/PolygonHorrorMansion/Prefabs/Buildings/SM_Bld_Architrave_02.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Imports/PolygonHorrorMansion/Prefabs/Buildings/SM_Bld_Architrave_02.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Imports/PolygonHorrorMansion/Prefabs/Buildings/SM_Bld_Architrave_03.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Imports/PolygonHorrorMansion/Prefabs/Buildings/SM_Bld_Architrave_03.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Imports/PolygonHorrorMansion/Prefabs/Buildings/SM_Bld_Architrave_04.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Imports/PolygonHorrorMansion/Prefabs/Buildings/SM_Bld_Architrave_04.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Imports/PolygonHorrorMansion/Prefabs/Buildings/SM_Bld_Architrave_05.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Imports/PolygonHorrorMansion/Prefabs/Buildings/SM_Bld_Architrave_05.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Imports/PolygonHorrorMansion/Prefabs/Buildings/SM_Bld_Architrave_06.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Imports/PolygonHorrorMansion/Prefabs/Buildings/SM_Bld_Architrave_06.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Imports/PolygonHorrorMansion/Prefabs/Buildings/SM_Bld_Skirting_01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Imports/PolygonHorrorMansion/Prefabs/Buildings/SM_Bld_Skirting_01.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Imports/PolygonHorrorMansion/Prefabs/Buildings/SM_Bld_Wall_Trim_01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Imports/PolygonHorrorMansion/Prefabs/Buildings/SM_Bld_Wall_Trim_01.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Imports/PolygonHorrorMansion/Prefabs/Buildings/SM_Bld_Wall_Trim_02.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Imports/PolygonHorrorMansion/Prefabs/Buildings/SM_Bld_Wall_Trim_02.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Imports/PolygonHorrorMansion/Prefabs/Buildings/SM_Bld_Wall_Trim_03.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Imports/PolygonHorrorMansion/Prefabs/Buildings/SM_Bld_Wall_Trim_03.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Imports/PolygonHorrorMansion/Prefabs/Buildings/SM_Bld_Wall_Trim_04.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Imports/PolygonHorrorMansion/Prefabs/Buildings/SM_Bld_Wall_Trim_04.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Imports/PolygonHorrorMansion/Prefabs/Buildings/SM_Bld_Wall_Trim_05.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Imports/PolygonHorrorMansion/Prefabs/Buildings/SM_Bld_Wall_Trim_05.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Imports/PolygonHorrorMansion/Prefabs/Buildings/SM_Bld_Wall_Trim_06.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Imports/PolygonHorrorMansion/Prefabs/Buildings/SM_Bld_Wall_Trim_06.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/HorrorMansion.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/HorrorMansion.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NpcInteraction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NpcInteraction.cs" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="2Wo5ytUxIqN6d5VgiEBzywWl9OJ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="de17f7f6-3b1a-4de5-b38a-b388700bdbc2" name="Changes" comment="" />
+      <created>1697386351141</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1697386351141</updated>
+    </task>
+    <servers />
+  </component>
+</project>

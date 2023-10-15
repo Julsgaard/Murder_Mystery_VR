@@ -13,10 +13,14 @@ public class NpcInteraction : MonoBehaviour
     public PromptManager promptManager;
     
     private AudioClip _playerRecording; //Used to store the audio clip recorded by the player before sending it to OpenAI
-    private bool _isRecording = false;
+    private bool _isRecording;
     private String _combinedPrompt; //The final combined prompt to be sent to openAI
-    
-    
+
+    private void Start()
+    {
+        _isRecording = false;
+    }
+
     //Controls the logic whether the recording should be started or stopped
     private void Update()
     {
@@ -25,16 +29,16 @@ public class NpcInteraction : MonoBehaviour
 
     private void CheckForPlayerProximity()
     {
-        if (npcCollision.IsPlayerInProximity()) ;
+        if (npcCollision.IsPlayerInProximity());
         {
-            if (Keyboard.current.eKey.isPressed && _isRecording != true)
+            if (Keyboard.current.eKey.isPressed && _isRecording == false)
             {
                 //Debug.Log("Player is talking to NPC");
 
                 StartRecording();
             }
 
-            if (Keyboard.current.eKey.IsPressed() != true && _isRecording)
+            if (Keyboard.current.eKey.IsPressed() == false && _isRecording)
             {
                 //Debug.Log("Done talking");
                 EndRecording();
