@@ -10,7 +10,7 @@ public class NpcPersonality : MonoBehaviour
     //TODO Add conversation history and refine the prompts (Found in Assets/Prompts)
     
     [SerializeField] 
-    private string _plotPrompt; //This prompt explains the plot and setup of the story to the NPC 
+    private string _plotPrompt; //This prompt explains the plot and setup of the story to the NPC  
     [SerializeField]
     private string _backstoryPrompt; //This prompt explains the unique backstory and personality of the NPC
     [SerializeField]
