@@ -72,8 +72,8 @@ public class NpcInteraction : MonoBehaviour
         Debug.Log($"Transcribed text: {transcribedText}");
         
         _combinedPrompt = promptManager.CombinedPrompt(npcCollision.GetCurrentNpc(),transcribedText);
-        //chatGPTManager.AskChatGPT(_combinedPrompt);
+        chatGPTManager.AskChatGPT(_combinedPrompt);
 
-        chatGPTManager.AskChatGPT(transcribedText);
+        //chatGPTManager.AskChatGPT(transcribedText);
     }
 }

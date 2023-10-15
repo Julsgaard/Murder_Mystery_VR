@@ -15,8 +15,9 @@ public class PromptManager : MonoBehaviour
     //Extracts relevant prompts based on the current NPC's NpcPersonality script, and combines them with playerResponse
     public string CombinedPrompt(GameObject currentNpc, string playerResponse)
     {
+        string plotPrompt = currentNpc.GetComponent<NpcPersonality>().getPlotPrompt();
         string backstoryPrompt = currentNpc.GetComponent<NpcPersonality>().getBackstoryPrompt();
-        string combinedPrompt = backstoryPrompt+ playerResponse;
+        string combinedPrompt = plotPrompt + backstoryPrompt + playerResponse;
         return combinedPrompt;
     }
 }
