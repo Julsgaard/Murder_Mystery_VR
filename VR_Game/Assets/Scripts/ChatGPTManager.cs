@@ -17,10 +17,6 @@ public class ChatGPTManager : MonoBehaviour
     public LMNTSpeech speech;
 
 
-
-
-
-
     private OpenAIApi openAI = new OpenAIApi();
     //private OpenAIApi openAI = new OpenAIApi("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");
     private List<ChatMessage> messages = new List<ChatMessage>();
@@ -30,8 +26,9 @@ public class ChatGPTManager : MonoBehaviour
         return "Answer the following question as if you were a medieval peasant, and in no longer than 20 words: ";
     }
 
-    public async void AskChatGPT(string npcPrompt)
+    public async Task<string> AskChatGPT(string npcPrompt)
     {
+        String gptResponse = null;
         ChatMessage newMessage = new ChatMessage();
         //newMessage.Content = GetDefaultPrompt() + npcPrompt;
         newMessage.Content = npcPrompt;
@@ -53,13 +50,18 @@ public class ChatGPTManager : MonoBehaviour
 
             Debug.Log(chatResponse.Content);
 
+            gptResponse = chatResponse.Content;
+
             //onResponse.Invoke(chatResponse.Content);
 
             //LMNT SPEECH STUFF
             //speech.dialogue = chatResponse.Content;
             //StartCoroutine(speech.Talk());
             //responseField.text = chatResponse.Content;
+
         }
+
+        return gptResponse;
     }
 
     public async Task<string> TranscribeAudioAndGetText(byte[] audio)

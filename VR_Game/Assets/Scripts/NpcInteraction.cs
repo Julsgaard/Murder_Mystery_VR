@@ -11,6 +11,7 @@ public class NpcInteraction : MonoBehaviour
     public ChatGPTManager chatGPTManager;
     public GameManager gameManager;
     public PromptManager promptManager;
+    public TTSManager ttsManager;
     
     private AudioClip _playerRecording; //Used to store the audio clip recorded by the player before sending it to OpenAI
     private bool _isRecording;
@@ -76,7 +77,9 @@ public class NpcInteraction : MonoBehaviour
         Debug.Log($"Transcribed text: {transcribedText}");
         
         _combinedPrompt = promptManager.CombinedPrompt(npcCollision.GetCurrentNpc(),transcribedText);
-        chatGPTManager.AskChatGPT(_combinedPrompt);
+        String response = await chatGPTManager.AskChatGPT(_combinedPrompt);
+        ttsManager.startTTS(npcCollision.GetCurrentNpc(),response);
+        
 
         //chatGPTManager.AskChatGPT(transcribedText);
     }
