@@ -71,13 +71,21 @@ public class NpcInteraction : MonoBehaviour
         //System.IO.File.WriteAllBytes(filePath, audio);
 
         
-        string transcribedText = await chatGPTManager.TranscribeAudioAndGetText(audio);
+        string playerResponse = await chatGPTManager.TranscribeAudioAndGetText(audio);
+        Debug.Log($"Transcribed text: {playerResponse}");
         
-        Debug.Log($"Transcribed text: {transcribedText}");
         
-        _combinedPrompt = promptManager.CombinedPrompt(npcCollision.GetCurrentNpc(),transcribedText);
-        chatGPTManager.AskChatGPT(_combinedPrompt);
-
+        
+        _combinedPrompt = promptManager.CombinedPrompt(npcCollision.GetCurrentNpc());
+        Debug.Log(_combinedPrompt);
+        
+        string npcResponse = await chatGPTManager.AskChatGPT(_combinedPrompt, playerResponse);
+        Debug.Log(npcResponse);
+        
+        string conversationHistory = npcCollision.GetCurrentNpc().GetComponent<NpcPersonality>().
+            AddToConversationHistory(npcCollision.GetCurrentNpc(), playerResponse, npcResponse);
+        
+        
         //chatGPTManager.AskChatGPT(transcribedText);
     }
 }

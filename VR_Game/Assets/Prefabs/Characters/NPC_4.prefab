@@ -527,6 +527,7 @@ GameObject:
   - component: {fileID: 95984852126199364}
   - component: {fileID: 4097099000270610563}
   - component: {fileID: 6066774279434972051}
+  - component: {fileID: 2151672491524660036}
   m_Layer: 0
   m_Name: NPC_4
   m_TagString: NPC
@@ -625,6 +626,24 @@ CapsuleCollider:
   m_Height: 1.8334253
   m_Direction: 1
   m_Center: {x: 0, y: 0.9157394, z: -0.018519193}
+--- !u!114 &2151672491524660036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1135223553736032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5442ff17e7d4dc549b8bec11ae137a4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _plotPrompt: 
+  _backstoryPrompt: 
+  _conversationPrompt: 
+  plotPath: Assets/Prompts/PlotPrompt.txt
+  backstoryPath: Assets/Prompts/BackgroundPrompt1.txt
+  conversationHistory: 
 --- !u!1 &1163146189552152
 GameObject:
   m_ObjectHideFlags: 0

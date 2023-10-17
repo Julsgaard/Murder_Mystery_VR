@@ -80,8 +80,9 @@ namespace OpenAI
             progressBar.fillAmount = 0;
             message.text = res.Text;
             recordButton.enabled = true;
-
-            chatGPTManager.AskChatGPT(res.Text);
+            
+            //Not working because i changed the input for AskChatGPT
+            //chatGPTManager.AskChatGPT(res.Text);
         }
 
         private void Update()

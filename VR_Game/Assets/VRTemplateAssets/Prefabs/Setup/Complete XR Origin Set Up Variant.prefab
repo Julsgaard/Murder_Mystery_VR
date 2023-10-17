@@ -3640,7 +3640,7 @@ MonoBehaviour:
   npcCollision: {fileID: 6462382181107940645}
   chatGPTManager: {fileID: 0}
   gameManager: {fileID: 0}
-  isRecording: 0
+  promptManager: {fileID: 0}
 --- !u!4 &4154049534067976231 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7161851849281282612, guid: 895f6f3c2d334633b5800312285058d2, type: 3}

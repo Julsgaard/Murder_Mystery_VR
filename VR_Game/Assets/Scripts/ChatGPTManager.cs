@@ -30,14 +30,18 @@ public class ChatGPTManager : MonoBehaviour
         return "Answer the following question as if you were a medieval peasant, and in no longer than 20 words: ";
     }
 
-    public async void AskChatGPT(string npcPrompt)
+    public async Task<string> AskChatGPT(string npcPrompt, string transcribedText)
     {
-        ChatMessage newMessage = new ChatMessage();
-        //newMessage.Content = GetDefaultPrompt() + npcPrompt;
-        newMessage.Content = npcPrompt;
-        newMessage.Role = "user";   
-
-        messages.Add(newMessage);   
+        ChatMessage systemMessage = new ChatMessage();
+        systemMessage.Content = npcPrompt;
+        systemMessage.Role = "system";   
+        
+        ChatMessage playerMessage = new ChatMessage();
+        playerMessage.Content = transcribedText;
+        playerMessage.Role = "user";  
+        
+        messages.Add(systemMessage);
+        messages.Add(playerMessage);   
 
         CreateChatCompletionRequest request = new CreateChatCompletionRequest();    
         request.Messages = messages;
@@ -49,9 +53,12 @@ public class ChatGPTManager : MonoBehaviour
         if(response.Choices != null && response.Choices.Count > 0)
         {
             var chatResponse = response.Choices[0].Message;
-            messages.Add(chatResponse);
-
-            Debug.Log(chatResponse.Content);
+            //messages.Add(chatResponse);
+            
+            //Clearing the message list is the easier option as the openAI.CreateChatCompletion requires a list of messages
+            messages.Clear();
+            
+            return chatResponse.Content;
 
             //onResponse.Invoke(chatResponse.Content);
 
@@ -60,6 +67,8 @@ public class ChatGPTManager : MonoBehaviour
             //StartCoroutine(speech.Talk());
             //responseField.text = chatResponse.Content;
         }
+
+        return null;
     }
 
     public async Task<string> TranscribeAudioAndGetText(byte[] audio)
