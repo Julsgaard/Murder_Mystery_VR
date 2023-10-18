@@ -26,11 +26,12 @@ public class NpcInteraction : MonoBehaviour
     private void Update()
     {
         CheckForPlayerProximity();
+        Debug.Log($"In range:{npcCollision.IsPlayerInProximity()}");
     }
 
     private void CheckForPlayerProximity()
     {
-        if (npcCollision.IsPlayerInProximity());
+        if (npcCollision.IsPlayerInProximity())
         {
             if (Keyboard.current.eKey.isPressed && _isRecording == false)
             {
@@ -44,6 +45,11 @@ public class NpcInteraction : MonoBehaviour
                 //Debug.Log("Done talking");
                 EndRecording();
             }
+        }
+        else if (_isRecording) //To handle the case where the player moves out of proximity without lifting the E key
+        {
+            // Player moved out of proximity while recording
+            EndRecording();
         }
     }
 
