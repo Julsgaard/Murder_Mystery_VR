@@ -14,7 +14,7 @@ public class NpcPersonality : MonoBehaviour
     [SerializeField]
     private string _backstoryPrompt; //This prompt explains the unique backstory and personality of the NPC
 
-    public string conversationHistory = "No conversation so far"; //This prompt explains the conversation history between the player and the NPC
+    public string conversationHistory; //This prompt explains the conversation history between the player and the NPC
     
     public string plotPath = "Assets/Prompts/PlotPrompt.txt";
     public string backstoryPath = "Assets/Prompts/BackgroundPrompt1.txt";
