@@ -8,6 +8,7 @@ public class TTSManager : MonoBehaviour
     public TTSSpeaker ttsSpeaker;
     public void startTTS(GameObject currentNPC, string chatGptResponse)
     {
+        ttsSpeaker = currentNPC.GetComponent<TTSSpeaker>();
         ttsSpeaker.Speak(chatGptResponse);
     }
 }
