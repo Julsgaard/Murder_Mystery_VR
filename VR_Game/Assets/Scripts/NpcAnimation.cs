@@ -2,25 +2,39 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class NpcAnimation : MonoBehaviour
 {
     public Animator animator;
     public AudioSource audioSource;
     
-    private bool hasStartedTalking = false;
+    
+    private bool hasStartedTalking = false; 
     
     public float rotationSpeed = 2.0f; // Adjust the rotation speed as needed
-    [SerializeField]
-    private Transform _head, _spine;
+    [SerializeField] private GameObject headAim;
+    private MultiAimConstraint _multiAimConstraint;
     
     private void Start()
     {
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
 
-        _head = transform.Find("Root/Hips/Spine_01/Spine_02/Spine_03/Neck/Head");
-        _spine = transform.Find("Root/Hips/Spine_01/Spine_02");
+        headAim = transform.Find("Rig 1/Head Aim").gameObject;
+        _multiAimConstraint = headAim.GetComponent<MultiAimConstraint>();
+        
+        
+        GameObject currentPlayer = GameObject.FindGameObjectWithTag("Player");
+        // Get existing WeightedTransformArray
+        WeightedTransformArray weightedTransforms = _multiAimConstraint.data.sourceObjects;
+        // Add the new target to the existing WeightedTransformArray
+        weightedTransforms.Add(new WeightedTransform(currentPlayer.transform, 1f));  // 1f is the weight
+        // Update the MultiAimConstraint's sourceObjects
+        _multiAimConstraint.data.sourceObjects = weightedTransforms;
+        
+        gameObject.GetComponent<RigBuilder>().Build();
+
     }
 
     public void Update()
@@ -38,25 +52,20 @@ public class NpcAnimation : MonoBehaviour
     }
 
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            TurnTowardsPlayer(other.gameObject);
-            
+            _multiAimConstraint.weight = 1;
         }
     }
 
-    public void TurnTowardsPlayer(GameObject playerObject)
+    private void OnTriggerExit(Collider other)
     {
-        // Calculate the direction from the NPC to the player
-        Vector3 directionToPlayer = playerObject.transform.position - transform.position;
-
-        // Calculate the rotation needed to align with the player's direction
-        Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
-
-        // Apply the rotation to the head and spine using Slerp
-        _head.transform.rotation = Quaternion.Slerp(_head.transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
-        //_spine.transform.rotation = Quaternion.Slerp(_spine.transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        if (other.CompareTag("Player"))
+        {
+            _multiAimConstraint.weight = 0;
+            
+        }
     }
 }
