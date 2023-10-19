@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     public GameObject vrPlayerObject;
     public GameObject nonPlayerObject;
     
-    public bool enableVR;
+    public bool enableVR { get; set; } // Whether VR is enabled or not}
     
     public string[] availableMicrophones;
     public string selectedMicrophone;

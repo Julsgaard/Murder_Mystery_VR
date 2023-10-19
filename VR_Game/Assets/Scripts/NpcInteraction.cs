@@ -12,6 +12,7 @@ public class NpcInteraction : MonoBehaviour
     public GameManager gameManager;
     public PromptManager promptManager;
     public TTSManager ttsManager;
+    public AnimationManager AnimationManager;
     
     private AudioClip _playerRecording; //Used to store the audio clip recorded by the player before sending it to OpenAI
     private bool _isRecording;
