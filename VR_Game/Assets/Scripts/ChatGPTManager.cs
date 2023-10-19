@@ -21,8 +21,8 @@ public class ChatGPTManager : MonoBehaviour
 
 
 
-    private OpenAIApi openAI = new OpenAIApi();
-    //private OpenAIApi openAI = new OpenAIApi("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");
+    //private OpenAIApi openAI = new OpenAIApi();
+    private OpenAIApi openAI = new OpenAIApi("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");
     private List<ChatMessage> messages = new List<ChatMessage>();
 
     private string GetDefaultPrompt()
@@ -46,6 +46,8 @@ public class ChatGPTManager : MonoBehaviour
         CreateChatCompletionRequest request = new CreateChatCompletionRequest();    
         request.Messages = messages;
         request.Model = "gpt-3.5-turbo";
+        request.Temperature = 1f;
+        request.MaxTokens = 256;
         
 
         var response = await openAI.CreateChatCompletion(request);
