@@ -10,12 +10,12 @@ public class NpcPersonality : MonoBehaviour
     
     [SerializeField] private string plotPrompt; //This prompt explains the plot and setup of the story to the NPC  
     [SerializeField] private string backstoryPrompt; //This prompt explains the unique backstory and personality of the NPC
-    [SerializeField] private string systemPrompt;
+    private string _systemPrompt;
     
     public string plotPath = "Assets/Prompts/PlotPrompt.txt";
     public string backstoryPath = "Assets/Prompts/BackgroundPrompt1.txt";
     
-    private List<ChatMessage> _combinedMessages = new List<ChatMessage>();
+    private readonly List<ChatMessage> _combinedMessages = new List<ChatMessage>();
     
 
     private void Start()
@@ -23,69 +23,20 @@ public class NpcPersonality : MonoBehaviour
         plotPrompt = File.ReadAllText(plotPath);
         backstoryPrompt = File.ReadAllText(backstoryPath);
 
-        systemPrompt = "You are a NPC in a murder mystery game. The murder mystery has the following setup:\n" +
+        _systemPrompt = "You are a NPC in a murder mystery game. The murder mystery has the following setup:\n" +
                         $"{plotPrompt}\n\n" +
                         "The character you play has the following background:\n" +
                         $"{backstoryPrompt}\n\n" +
                         "You must answer as you character, and with a maximum of 25 words:";
         
         AddSystemPromptToList();
-        
-        //AddPlotPromptToList();
-        //AddBackstoryPromptToList();
     }
-
-    /*public string GetPlotPrompt()
-    {
-        return plotPrompt;
-    }
-    public string GetBackstoryPrompt()
-    {
-        return backstoryPrompt;
-    }*/
-
-    
-    /*public string AddToConversationHistory(GameObject currentNpc, string playerResponse, string npcResponse)
-    {
-        ChatMessage playerMessage = new ChatMessage();
-        playerMessage.Content = playerResponse;
-        playerMessage.Role = "user";
-        
-        ChatMessage npcMessage = new ChatMessage();
-        npcMessage.Content = npcResponse;
-        npcMessage.Role = "assistant";
-        
-        
-        //conversationHistory += "Player: " + playerResponse + "\n";
-        ////conversationHistory += currentNpc.name + npcResponse + "\n";
-        //conversationHistory += "You: " + npcResponse + "\n";
-        
-        return conversationHistory;
-    }*/
-    
-    /*private void AddPlotPromptToList()
-    {
-        ChatMessage plotMessage = new ChatMessage();
-        plotMessage.Content = plotPrompt;
-        plotMessage.Role = "system";
-        
-        _combinedMessages.Add(plotMessage);
-    }
-    
-    private void AddBackstoryPromptToList()
-    {
-        ChatMessage backstoryMessage = new ChatMessage();
-        backstoryMessage.Content = backstoryPrompt;
-        backstoryMessage.Role = "system";
-        
-        _combinedMessages.Add(backstoryMessage);
-    }*/
     
     private void AddSystemPromptToList()
     {
         var plotMessage = new ChatMessage
         {
-            Content = systemPrompt,
+            Content = _systemPrompt,
             Role = "system"
         };
 
@@ -102,6 +53,13 @@ public class NpcPersonality : MonoBehaviour
 
         _combinedMessages.Add(userMessage);
         
+        // Debugging: Log each message's Content
+        /*Debug.Log("Current messages in _combinedMessages:");
+        foreach (ChatMessage message in _combinedMessages)
+        {
+            Debug.Log("Role: " + message.Role + ", Content: " + message.Content);
+        }*/
+        
         return _combinedMessages;
     }
     
@@ -115,9 +73,4 @@ public class NpcPersonality : MonoBehaviour
 
         _combinedMessages.Add(assistantMessage);
     }
-
-
-
-
-
 }

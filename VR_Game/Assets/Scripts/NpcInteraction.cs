@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using OpenAI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,9 +7,7 @@ public class NpcInteraction : MonoBehaviour
     public NpcCollision npcCollision;
     public ChatGPTManager chatGPTManager;
     public GameManager gameManager;
-    public PromptManager promptManager;
     public TTSManager ttsManager;
-    public AnimationManager AnimationManager;
     
     private AudioClip _playerRecording; //Used to store the audio clip recorded by the player before sending it to OpenAI
     private bool _isRecording;
@@ -28,9 +22,10 @@ public class NpcInteraction : MonoBehaviour
     private void Update()
     {
         CheckForPlayerProximity();
-        Debug.Log($"In range:{npcCollision.IsPlayerInProximity()}");
+        //Debug.Log($"In range:{npcCollision.IsPlayerInProximity()}");
     }
 
+    // Checks if the player is in proximity of an NPC and if the player is pressing the E key
     private void CheckForPlayerProximity()
     {
         if (npcCollision.IsPlayerInProximity())
@@ -57,7 +52,7 @@ public class NpcInteraction : MonoBehaviour
 
 
     //Starts recording the player voice input to be transcribed and sent to OpenAI
-    public void StartRecording()
+    private void StartRecording()
     {
         _isRecording = true;
 
@@ -66,7 +61,7 @@ public class NpcInteraction : MonoBehaviour
     }
     
     //Ends the recording, transcribes the audio and sends it to OpenAI
-    public async void EndRecording()
+    private async void EndRecording()
     {
         _isRecording = false;
         Microphone.End(gameManager.selectedMicrophone);
@@ -88,7 +83,6 @@ public class NpcInteraction : MonoBehaviour
         
         //Adds the playerResponse to the list of messages for ChatGPT API
         var combinedMessages = npcCollision.GetCurrentNpc().GetComponent<NpcPersonality>().AddPlayerResponseToList(playerResponse);
-        Debug.Log(combinedMessages);
         
         // Get the response from OpenAI
         string npcResponse = await chatGPTManager.AskChatGPT(combinedMessages);

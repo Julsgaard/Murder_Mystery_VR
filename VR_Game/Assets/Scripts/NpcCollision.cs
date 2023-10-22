@@ -1,10 +1,9 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class NpcCollision : MonoBehaviour
 {
-    /**
+    /*
      * This script is used to detect whether the player is in proximity of an NPC or not.
      * The script passes whether the player is within range of an NPC, and which NPC the player is in range of.
      */
@@ -20,19 +19,23 @@ public class NpcCollision : MonoBehaviour
     {
         return _currentNpc;
     }
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("NPC"))
+        {
+            // Player has entered the proximity
+            Debug.Log($"Player is now in proximity: {other.gameObject.name}");
+        }
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("NPC"))
         {
             // Player has entered the proximity
-            Debug.Log("Player is in proximity!");
             _isPlayerInProximity = true;
             _currentNpc = other.gameObject;
-
-
-            //other.gameObject.GetComponent<NpcPersonality>();
-
 
             //RaycastCollision();
         }
@@ -42,11 +45,10 @@ public class NpcCollision : MonoBehaviour
         if (other.CompareTag("NPC"))
         {
             // Player has exited the proximity
-            Debug.Log("Player exited the proximity!");
+            Debug.Log($"Player exited the proximity: {other.gameObject.name}");
             _isPlayerInProximity = false;
             //_currentNpc = null; <- Not sure if we should set this, it's easier if we don't but unsure if it'll cause bugs
-
-
+            
         }
     }
 
