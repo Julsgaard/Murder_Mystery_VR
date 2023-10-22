@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using OpenAI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,7 +17,7 @@ public class NpcInteraction : MonoBehaviour
     
     private AudioClip _playerRecording; //Used to store the audio clip recorded by the player before sending it to OpenAI
     private bool _isRecording;
-    private String _combinedPrompt; //The final combined prompt to be sent to openAI
+    //private String _systemPrompt; //The final combined prompt to be sent to openAI
 
     private void Start()
     {
@@ -70,32 +71,33 @@ public class NpcInteraction : MonoBehaviour
         _isRecording = false;
         Microphone.End(gameManager.selectedMicrophone);
         
+        
+        // Trim the audio clip to remove silence
         AudioClip trimmedAudioClip = SaveWav.TrimSilence(_playerRecording, 0.001f);
 
+        // Save the audio clip to a wav file
         byte[] audio = SaveWav.Save("tempClip", trimmedAudioClip);
         
         // Save to file for debugging
         //string filePath = Application.dataPath + "/TempAudio.wav";
         //System.IO.File.WriteAllBytes(filePath, audio);
 
-        
+        // Transcribes the audio and get the text
         string playerResponse = await chatGPTManager.TranscribeAudioAndGetText(audio);
         Debug.Log($"Transcribed text: {playerResponse}");
         
+        //Adds the playerResponse to the list of messages for ChatGPT API
+        var combinedMessages = npcCollision.GetCurrentNpc().GetComponent<NpcPersonality>().AddPlayerResponseToList(playerResponse);
+        Debug.Log(combinedMessages);
         
+        // Get the response from OpenAI
+        string npcResponse = await chatGPTManager.AskChatGPT(combinedMessages);
+        Debug.Log($"NPC response: {npcResponse}");
         
-        _combinedPrompt = promptManager.CombinedPrompt(npcCollision.GetCurrentNpc());
-        Debug.Log(_combinedPrompt);
-        
-        string npcResponse = await chatGPTManager.AskChatGPT(_combinedPrompt, playerResponse);
-        Debug.Log(npcResponse);
-        
+        //Plays the TTS audio
         ttsManager.startTTS(npcCollision.GetCurrentNpc(), npcResponse);
         
-        string conversationHistory = npcCollision.GetCurrentNpc().GetComponent<NpcPersonality>().
-            AddToConversationHistory(npcCollision.GetCurrentNpc(), playerResponse, npcResponse);
-        
-        
-        //chatGPTManager.AskChatGPT(transcribedText);
+        //Adds the npcResponse to the list of messages for ChatGPT API
+        npcCollision.GetCurrentNpc().GetComponent<NpcPersonality>().AddNpcResponseToList(npcResponse);
     }
 }

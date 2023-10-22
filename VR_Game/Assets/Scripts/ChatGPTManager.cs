@@ -23,16 +23,16 @@ public class ChatGPTManager : MonoBehaviour
 
     //private OpenAIApi openAI = new OpenAIApi();
     private OpenAIApi openAI = new OpenAIApi("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");
-    private List<ChatMessage> messages = new List<ChatMessage>();
+    //private List<ChatMessage> messages = new List<ChatMessage>();
 
     private string GetDefaultPrompt()
     {
         return "Answer the following question as if you were a medieval peasant, and in no longer than 20 words: ";
     }
 
-    public async Task<string> AskChatGPT(string npcPrompt, string transcribedText)
+    public async Task<string> AskChatGPT(List<ChatMessage> combinedMessages)
     {
-        ChatMessage systemMessage = new ChatMessage();
+        /*ChatMessage systemMessage = new ChatMessage();
         systemMessage.Content = npcPrompt;
         systemMessage.Role = "system";   
         
@@ -41,10 +41,10 @@ public class ChatGPTManager : MonoBehaviour
         playerMessage.Role = "user";  
         
         messages.Add(systemMessage);
-        messages.Add(playerMessage);   
+        messages.Add(playerMessage);*/   
 
         CreateChatCompletionRequest request = new CreateChatCompletionRequest();    
-        request.Messages = messages;
+        request.Messages = combinedMessages;
         request.Model = "gpt-3.5-turbo";
         request.Temperature = 1f;
         request.MaxTokens = 256;
@@ -58,7 +58,7 @@ public class ChatGPTManager : MonoBehaviour
             //messages.Add(chatResponse);
             
             //Clearing the message list is the easier option as the openAI.CreateChatCompletion requires a list of messages
-            messages.Clear();
+            //messages.Clear();
             
             return chatResponse.Content;
 
