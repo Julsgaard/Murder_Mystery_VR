@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
         
         availableMicrophones = Microphone.devices; // Populate availableMicrophones with the names of all available microphones
         
-        selectedMicrophone = Microphone.devices[0]; // Select the first microphone in the list of available microphones
+        selectedMicrophone = Microphone.devices[2]; // Select the first microphone in the list of available microphones
         
         EnableVR();
 
