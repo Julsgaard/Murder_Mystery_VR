@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -81,17 +82,33 @@ public class NpcInteraction : MonoBehaviour
         string playerResponse = await chatGPTManager.TranscribeAudioAndGetText(audio);
         Debug.Log($"Transcribed text: {playerResponse}");
         
+        await GenerateNPCResponse(playerResponse);
+    }
+    
+    
+
+    private async Task GenerateNPCResponse(string playerResponse)
+    {
         //Adds the playerResponse to the list of messages for ChatGPT API
-        var combinedMessages = npcCollision.GetCurrentNpc().GetComponent<NpcPersonality>().AddPlayerResponseToList(playerResponse);
-        
+        var combinedMessages = npcCollision.GetCurrentNpc().GetComponent<NpcPersonality>()
+            .AddPlayerResponseToList(playerResponse);
+
         // Get the response from OpenAI
         string npcResponse = await chatGPTManager.AskChatGPT(combinedMessages);
         Debug.Log($"NPC response: {npcResponse}");
-        
+
         //Plays the TTS audio
         ttsManager.startTTS(npcCollision.GetCurrentNpc(), npcResponse);
-        
+
         //Adds the npcResponse to the list of messages for ChatGPT API
         npcCollision.GetCurrentNpc().GetComponent<NpcPersonality>().AddNpcResponseToList(npcResponse);
+    }
+    
+    
+    //METHOD FOR INTERACTING THROUGH DIALOGUE OPTIONS:
+    public void ExtractDialogueOptionAndSendToOpenAI(string buttonText)
+    {
+        
+        
     }
 }
