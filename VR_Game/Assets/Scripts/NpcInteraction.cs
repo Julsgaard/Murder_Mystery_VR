@@ -106,7 +106,7 @@ public class NpcInteraction : MonoBehaviour
     
     
     //METHOD FOR INTERACTING THROUGH DIALOGUE OPTIONS:
-    public void ExtractDialogueOptionAndSendToOpenAI(string buttonText)
+    public void SendDialogueOptionToOpenAI(string buttonText)
     {
         
         

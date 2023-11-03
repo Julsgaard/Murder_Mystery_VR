@@ -23,11 +23,23 @@ public class NpcPersonality : MonoBehaviour
         plotPrompt = File.ReadAllText(plotPath);
         backstoryPrompt = File.ReadAllText(backstoryPath);
 
-        _systemPrompt = "You are a NPC in a murder mystery. The murder mystery has the following setup:\n" +
-                        $"{plotPrompt}\n\n" +
-                        "The character you are has the following background:\n" +
-                        $"{backstoryPrompt}\n\n" +
-                        "You answer in a way that is suitable for text to speech, and You must answer as you character, and with a maximum of 25 words:";
+        if (GameManager.EnableDialogueOptions)
+        {
+            _systemPrompt = "You are a NPC in a murder mystery. The murder mystery has the following setup:\n" +
+                            $"{plotPrompt}\n\n" +
+                            "The character you are has the following background:\n" +
+                            $"{backstoryPrompt}\n\n" +
+                            "You answer in a way that is suitable for text to speech, and You must answer as you character, and with a maximum of 25 words. ";
+        }
+        else
+        {
+            _systemPrompt = "You are a NPC in a murder mystery. The murder mystery has the following setup:\n" +
+                            $"{plotPrompt}\n\n" +
+                            "The character you are has the following background:\n" +
+                            $"{backstoryPrompt}\n\n" +
+                            "You answer in a way that is suitable for text to speech, and You must answer as you character, and with a maximum of 25 words:";
+        }
+        
         
         AddSystemPromptToList();
     }
