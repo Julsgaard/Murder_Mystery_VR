@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 
 public class NpcInteraction : MonoBehaviour
@@ -9,10 +10,13 @@ public class NpcInteraction : MonoBehaviour
     public ChatGPTManager chatGPTManager;
     public GameManager gameManager;
     public TTSManager ttsManager;
+    public ResponseDivider responseDivider;
     
     private AudioClip _playerRecording; //Used to store the audio clip recorded by the player before sending it to OpenAI
     private bool _isRecording;
     //private String _systemPrompt; //The final combined prompt to be sent to openAI
+
+    public event Action doneGeneratingNpcResponse;
 
     private void Start()
     {
@@ -87,28 +91,40 @@ public class NpcInteraction : MonoBehaviour
     
     
 
-    private async Task GenerateNPCResponse(string playerResponse)
+    public async Task GenerateNPCResponse(string playerResponse)
     {
         //Adds the playerResponse to the list of messages for ChatGPT API
         var combinedMessages = npcCollision.GetCurrentNpc().GetComponent<NpcPersonality>()
             .AddPlayerResponseToList(playerResponse);
 
         // Get the response from OpenAI
-        string npcResponse = await chatGPTManager.AskChatGPT(combinedMessages);
-        Debug.Log($"NPC response: {npcResponse}");
+        string gptResponse = await chatGPTManager.AskChatGPT(combinedMessages);
+        
+        Debug.Log($"GPT response: {gptResponse}");
+        
+        //Response contains both the npcdialogue and the dialogue options for the player so we split it
+        responseDivider.SplitResponseIntoNpcDialogueAndDialogueOptions(gptResponse);
+        string _npcResponse = responseDivider.GetNpcResponse();
+        
+        
+        
+        
+        Debug.Log($"NPC response: {_npcResponse}");
+        Debug.Log($"Dialogue options: {responseDivider.GetDialogueOptionsArray()[0]}+{responseDivider.GetDialogueOptionsArray()[1]}+{responseDivider.GetDialogueOptionsArray()[2]}+{responseDivider.GetDialogueOptionsArray()[3]}");
 
         //Plays the TTS audio
-        ttsManager.startTTS(npcCollision.GetCurrentNpc(), npcResponse);
+        ttsManager.startTTS(npcCollision.GetCurrentNpc(), _npcResponse);
 
         //Adds the npcResponse to the list of messages for ChatGPT API
-        npcCollision.GetCurrentNpc().GetComponent<NpcPersonality>().AddNpcResponseToList(npcResponse);
+        npcCollision.GetCurrentNpc().GetComponent<NpcPersonality>().AddNpcResponseToList(_npcResponse);
+        
+        //Calls an event to notify the ButtonScript that the NPC response has been generated
+        doneGeneratingNpcResponse?.Invoke();
     }
     
-    
-    //METHOD FOR INTERACTING THROUGH DIALOGUE OPTIONS:
-    public void SendDialogueOptionToOpenAI(string buttonText)
+    public string[] GetDialogueOptions()
     {
-        
-        
+        return responseDivider.GetDialogueOptionsArray();
     }
 }
+

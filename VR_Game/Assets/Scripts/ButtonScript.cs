@@ -22,7 +22,9 @@ public class ButtonScript : MonoBehaviour
             buttonList[i].onClick.AddListener(() => OnClick(buttonIndex));
             
         }
-        
+
+        npcInteraction.doneGeneratingNpcResponse += AddNewDialogueOptionsToButtons;
+
     }
 
 
@@ -36,10 +38,19 @@ public class ButtonScript : MonoBehaviour
             _buttonText = buttonList[buttonIndex].GetComponentInChildren<TMP_Text>().text;
             Debug.Log($"Button {buttonIndex + 1} text: {_buttonText}");
             
-            //npcInteraction.SendDialogueOptionToOpenAI();
+            var dialogueOptionsArray = npcInteraction.GenerateNPCResponse(_buttonText);
+
             
-            // Call a method based on the clicked button
-            //npcInteraction.HandleButtonClicked(buttonIndex);
+        }
+    }
+    
+    private void AddNewDialogueOptionsToButtons()
+    {   
+        var dialogueOptionsArray = npcInteraction.GetDialogueOptions();
+        //Add each dialogue option to the buttons
+        for (int i = 0; i < buttonList.Count; i++)
+        {
+            buttonList[i].GetComponentInChildren<TMP_Text>().text = dialogueOptionsArray[i];
         }
     }
 }

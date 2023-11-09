@@ -22,23 +22,20 @@ public class NpcPersonality : MonoBehaviour
     {
         plotPrompt = File.ReadAllText(plotPath);
         backstoryPrompt = File.ReadAllText(backstoryPath);
+        
 
-        if (GameManager.EnableDialogueOptions)
-        {
-            _systemPrompt = "You are a NPC in a murder mystery. The murder mystery has the following setup:\n" +
-                            $"{plotPrompt}\n\n" +
-                            "The character you are has the following background:\n" +
-                            $"{backstoryPrompt}\n\n" +
-                            "You answer in a way that is suitable for text to speech, and You must answer as you character, and with a maximum of 25 words. ";
-        }
-        else
-        {
-            _systemPrompt = "You are a NPC in a murder mystery. The murder mystery has the following setup:\n" +
-                            $"{plotPrompt}\n\n" +
-                            "The character you are has the following background:\n" +
-                            $"{backstoryPrompt}\n\n" +
-                            "You answer in a way that is suitable for text to speech, and You must answer as you character, and with a maximum of 25 words:";
-        }
+        _systemPrompt = "You are a NPC in a murder mystery. The murder mystery has the following setup:\n" +
+                        $"{plotPrompt}\n\n" +
+                        "The character you are has the following background:\n" +
+                        $"{backstoryPrompt}\n\n" +
+                        "When the user asks you a question, you must provide two things:" +
+                        "1. A response your character will say, suitable for text to speech and no longer than 25 words." +
+                        "2. Four answers which the user can pick between to continue the conversation in the following format:" +
+                        "1. {option 1}" +
+                        "2. {option 2}" +
+                        "3. {option 3}" +
+                        "4. {option 4} ";
+
         
         
         AddSystemPromptToList();
@@ -84,5 +81,11 @@ public class NpcPersonality : MonoBehaviour
         };
 
         _combinedMessages.Add(assistantMessage);
+    }
+    
+    
+    public List<ChatMessage> GetCombinedMessages()
+    {
+        return _combinedMessages;
     }
 }
