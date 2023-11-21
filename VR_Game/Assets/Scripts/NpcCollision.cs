@@ -10,7 +10,7 @@ public class NpcCollision : MonoBehaviour
     private bool _isPlayerInProximity;   // Whether the player is in proximity or not
     private GameObject _currentNpc; // The current NPC that the player has collided with
 
-    public event Action playerEnteredNpcRange;
+    public event Action playerEnteredNpcRange; //Event that is invoked when the player enters the proximity of an NPC (Used to enable the UI in the DialoguePanelSpawner script)
     public event Action playerExitedNpcRange;
     
     

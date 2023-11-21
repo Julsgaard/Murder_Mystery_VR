@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class ButtonScript : MonoBehaviour
 {
     public List<Button> buttonList = new List<Button>();
-    public List<TMP_Text> _buttonTextList = new List<TMP_Text>();
+    public List<TMP_Text> buttonTextList = new List<TMP_Text>();
     private int _amountOfEnabledButtons;
 
     public Button backButton; //Button to handle going back to the defaultQuestions
@@ -44,7 +44,7 @@ public class ButtonScript : MonoBehaviour
             buttonList[i].onClick.AddListener(() => OnClick(buttonIndex));
             
             //Also add the text of each button to buttonTextList
-            _buttonTextList.Add(buttonList[i].GetComponentInChildren<TMP_Text>());
+            buttonTextList.Add(buttonList[i].GetComponentInChildren<TMP_Text>());
         }
         
         //Add a listener to the backbutton
@@ -66,7 +66,7 @@ public class ButtonScript : MonoBehaviour
         //If in another other state than default state, send the button text to openAI API and return to default state
         else
         {
-            npcInteraction.GenerateNPCResponse(_buttonTextList[buttonIndex].text);
+            npcInteraction.GenerateNPCResponse(buttonTextList[buttonIndex].text);
             _currentState = DialogueOptionState.DefaultQuestions;
         }
 
@@ -83,48 +83,48 @@ public class ButtonScript : MonoBehaviour
             case DialogueOptionState.DefaultQuestions:
                 _amountOfEnabledButtons = 4;
                 UpdateButtonPositions(_amountOfEnabledButtons);
-                _buttonTextList[0].text = "Ask about character";
-                _buttonTextList[1].text = "Ask about clues";
-                _buttonTextList[2].text = "Ask about events";
-                _buttonTextList[3].text = "Ask about backstory";
+                buttonTextList[0].text = "Ask about character";
+                buttonTextList[1].text = "Ask about clues";
+                buttonTextList[2].text = "Ask about events";
+                buttonTextList[3].text = "Ask about backstory";
                 backButton.gameObject.SetActive(false);
                 break;
             case DialogueOptionState.CharacterQuestions:
                 _amountOfEnabledButtons = 6;
                 UpdateButtonPositions(_amountOfEnabledButtons);
-                _buttonTextList[0].text = "Ashley";
-                _buttonTextList[1].text = "Jens";
-                _buttonTextList[2].text = "Me";
-                _buttonTextList[3].text = "Leonard";
-                _buttonTextList[4].text = "Quinn";
-                _buttonTextList[5].text = "Chris";
+                buttonTextList[0].text = "Ashley";
+                buttonTextList[1].text = "Jens";
+                buttonTextList[2].text = "Me";
+                buttonTextList[3].text = "Leonard";
+                buttonTextList[4].text = "Quinn";
+                buttonTextList[5].text = "Chris";
                 backButton.gameObject.SetActive(true);
                 break;
             case DialogueOptionState.ClueQuestions:
                 _amountOfEnabledButtons = 4;
                 UpdateButtonPositions(_amountOfEnabledButtons);
-                _buttonTextList[0].text = "Clue 1";
-                _buttonTextList[1].text = "Clue 2";
-                _buttonTextList[2].text = "Clue 3";
-                _buttonTextList[3].text = "Clue 4";
+                buttonTextList[0].text = "Clue 1";
+                buttonTextList[1].text = "Clue 2";
+                buttonTextList[2].text = "Clue 3";
+                buttonTextList[3].text = "Clue 4";
                 backButton.gameObject.SetActive(true);
                 break;
             case DialogueOptionState.EventQuestions:
                 _amountOfEnabledButtons = 4;
                 UpdateButtonPositions(_amountOfEnabledButtons);
-                _buttonTextList[0].text = "The murder";
-                _buttonTextList[1].text = "Your alibi";
-                _buttonTextList[2].text = "";
-                _buttonTextList[3].text = "";
+                buttonTextList[0].text = "The murder";
+                buttonTextList[1].text = "Your alibi";
+                buttonTextList[2].text = "";
+                buttonTextList[3].text = "";
                 backButton.gameObject.SetActive(true);
                 break;
             case DialogueOptionState.BackstoryQuestions:
                 _amountOfEnabledButtons = 4;
                 UpdateButtonPositions(_amountOfEnabledButtons);
-                _buttonTextList[0].text = "Who are you?";
-                _buttonTextList[1].text = "What are your interests?";
-                _buttonTextList[2].text = "";
-                _buttonTextList[3].text = "";
+                buttonTextList[0].text = "Who are you?";
+                buttonTextList[1].text = "What are your interests?";
+                buttonTextList[2].text = "";
+                buttonTextList[3].text = "";
                 backButton.gameObject.SetActive(true);
                 break;
             
