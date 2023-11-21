@@ -7,8 +7,9 @@ public class GameManager : MonoBehaviour
     public GameObject nonPlayerObject;
 
     public bool enableVR;// Whether VR is enabled or not}
-    public static bool EnableDialogueOptions; // Whether dialogue options are enabled or not
-    
+
+    public bool enableDialogueOptions; // Whether dialogue options are enabled or not
+
     public string[] availableMicrophones;
     public string selectedMicrophone;
 

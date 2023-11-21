@@ -8,7 +8,10 @@ public class NpcCollision : MonoBehaviour
      * The script passes whether the player is within range of an NPC, and which NPC the player is in range of.
      */
     private bool _isPlayerInProximity;   // Whether the player is in proximity or not
-    private GameObject _currentNpc;            // The current NPC that the player has collided with
+    private GameObject _currentNpc; // The current NPC that the player has collided with
+
+    public event Action playerEnteredNpcRange;
+    public event Action playerExitedNpcRange;
     
     
     public bool IsPlayerInProximity()
@@ -26,6 +29,10 @@ public class NpcCollision : MonoBehaviour
         {
             // Player has entered the proximity
             Debug.Log($"Player is now in proximity: {other.gameObject.name}");
+            _isPlayerInProximity = true;
+            _currentNpc = other.gameObject;
+            
+            playerEnteredNpcRange?.Invoke();
         }
     }
 
@@ -34,10 +41,11 @@ public class NpcCollision : MonoBehaviour
         if (other.CompareTag("NPC"))
         {
             // Player has entered the proximity
-            _isPlayerInProximity = true;
-            _currentNpc = other.gameObject;
+            
 
             //RaycastCollision();
+            
+            
         }
     }
     private void OnTriggerExit(Collider other)
@@ -48,6 +56,8 @@ public class NpcCollision : MonoBehaviour
             Debug.Log($"Player exited the proximity: {other.gameObject.name}");
             _isPlayerInProximity = false;
             //_currentNpc = null; <- Not sure if we should set this, it's easier if we don't but unsure if it'll cause bugs
+            
+            playerExitedNpcRange?.Invoke();
             
         }
     }

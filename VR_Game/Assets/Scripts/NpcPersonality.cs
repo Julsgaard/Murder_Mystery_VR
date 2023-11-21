@@ -28,13 +28,7 @@ public class NpcPersonality : MonoBehaviour
                         $"{plotPrompt}\n\n" +
                         "The character you are has the following background:\n" +
                         $"{backstoryPrompt}\n\n" +
-                        "When the user asks you a question, you must provide two things:" +
-                        "1. A response your character will say, suitable for text to speech and no longer than 25 words." +
-                        "2. Four answers which the user can pick between to continue the conversation in the following format:" +
-                        "1. {option 1}" +
-                        "2. {option 2}" +
-                        "3. {option 3}" +
-                        "4. {option 4} ";
+                        "When the user asks you a question, provide a response you character would say (max 25 words), suitable for text to speech)";
 
         
         

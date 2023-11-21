@@ -122,9 +122,5 @@ public class NpcInteraction : MonoBehaviour
         doneGeneratingNpcResponse?.Invoke();
     }
     
-    public string[] GetDialogueOptions()
-    {
-        return responseDivider.GetDialogueOptionsArray();
-    }
 }
 
