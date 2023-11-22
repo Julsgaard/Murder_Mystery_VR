@@ -403,6 +403,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "StartRecordAudio",
+                    "type": "Button",
+                    "id": "ae020486-2936-4302-9b46-7d8fcc6491f3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "StopRecordAudio",
+                    "type": "Button",
+                    "id": "828a6fda-4187-49bc-ae05-f34ae9dd307c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -612,6 +630,28 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "Aim Flags",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fe135170-c7c6-42c3-9baf-25262b3e1abe",
+                    "path": "<OculusTouchController>{LeftHand}/primaryButton",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "StartRecordAudio",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "879583d8-c864-4e65-a8ae-702888feda8c",
+                    "path": "<OculusTouchController>{LeftHand}/primaryButton",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "StopRecordAudio",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System;
 
 
 public class NpcInteraction : MonoBehaviour
@@ -10,21 +9,24 @@ public class NpcInteraction : MonoBehaviour
     public ChatGPTManager chatGPTManager;
     public GameManager gameManager;
     public TTSManager ttsManager;
-    
     private AudioClip _playerRecording; //Used to store the audio clip recorded by the player before sending it to OpenAI
-    private bool _isRecording;
+    public bool isRecording;
     //private String _systemPrompt; //The final combined prompt to be sent to openAI
     
 
     private void Start()
     {
-        _isRecording = false;
+        isRecording = false;
     }
 
     //Controls the logic whether the recording should be started or stopped
     private void Update()
     {
-        CheckForPlayerProximity();
+        if (gameManager.enableVR == false)
+        {
+            CheckForPlayerProximity();
+        }
+   
         //Debug.Log($"In range:{npcCollision.IsPlayerInProximity()}");
     }
 
@@ -33,20 +35,20 @@ public class NpcInteraction : MonoBehaviour
     {
         if (npcCollision.IsPlayerInProximity())
         {
-            if (Keyboard.current.eKey.isPressed && _isRecording == false)
+            if (Keyboard.current.eKey.isPressed && isRecording == false)
             {
                 //Debug.Log("Player is talking to NPC");
 
                 StartRecording();
             }
 
-            if (Keyboard.current.eKey.IsPressed() == false && _isRecording)
+            if (Keyboard.current.eKey.IsPressed() == false && isRecording)
             {
                 //Debug.Log("Done talking");
                 EndRecording();
             }
         }
-        else if (_isRecording) //To handle the case where the player moves out of proximity without lifting the E key
+        else if (isRecording) //To handle the case where the player moves out of proximity without lifting the E key
         {
             // Player moved out of proximity while recording
             EndRecording();
@@ -55,18 +57,22 @@ public class NpcInteraction : MonoBehaviour
 
 
     //Starts recording the player voice input to be transcribed and sent to OpenAI
-    private void StartRecording()
+    public void StartRecording()
     {
-        _isRecording = true;
+        //Debug.Log("Started recording");
+        
+        isRecording = true;
 
         _playerRecording = Microphone.Start(gameManager.selectedMicrophone,false, 60, 44100);
 
     }
     
     //Ends the recording, transcribes the audio and sends it to OpenAI
-    private async void EndRecording()
+    public async void EndRecording()
     {
-        _isRecording = false;
+        //Debug.Log("Stopped recording");
+        
+        isRecording = false;
         Microphone.End(gameManager.selectedMicrophone);
         
         
