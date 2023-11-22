@@ -18,7 +18,7 @@ public class ChatGPTManager : MonoBehaviour
         CreateChatCompletionRequest request = new CreateChatCompletionRequest();    
         request.Messages = combinedMessages;
         request.Model = "gpt-3.5-turbo";
-        request.Temperature = 1f;
+        request.Temperature = 0.8f;
         request.MaxTokens = 256;
 
         var response = await openAI.CreateChatCompletion(request);

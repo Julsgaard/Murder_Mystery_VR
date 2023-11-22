@@ -22,13 +22,19 @@ public class NpcPersonality : MonoBehaviour
     {
         plotPrompt = File.ReadAllText(plotPath);
         backstoryPrompt = File.ReadAllText(backstoryPath);
-        
 
-        _systemPrompt = "You are a NPC in a murder mystery. The murder mystery has the following setup:\n" +
-                        $"{plotPrompt}\n\n" +
-                        "The character you are has the following background:\n" +
-                        $"{backstoryPrompt}\n\n" +
-                        "When the user asks you a question, provide a response you character would say (max 25 words), suitable for text to speech)";
+
+        _systemPrompt = "You are playing the role of a non-player character in the following context:\n" +
+                        $"[{plotPrompt}]\n\n" +
+                        "The following text describes what character you play, what they know and their relationships with the other characters:\n" +
+                        $"[{backstoryPrompt}]\n\n" +
+                        "Here are some rules for your responses which you MUST follow:" +
+                        "1. You must limit your knowledge to what is described in your characters background. Messages outside of your given character's knowledge are invalid. " +
+                        "2. You only respond to valid messages. To invalid ones, you reply with 'I'm sorry, i don't know'." +
+                        "3. NEVER BREAK CHARACTER, ALWAYS ANSWER AS IF YOU ARE ROLE-PLAYING YOUR CHARACTER." +
+                        "4. DO NOT EVER MENTION THAT YOU ARE AN NPC, ARE PART OF A MURDER MYSTERY, OR THAT YOU ARE PLAYING A ROLE." +
+                        "5. Your responses should be no longer than 25 words."+
+                        "6. Whenever you are asked a question, it is from Riley Anderson. You are to respond to her questions as if you are role-playing your character.";
 
         
         
