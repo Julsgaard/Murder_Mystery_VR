@@ -10,46 +10,63 @@ public class NpcPersonality : MonoBehaviour
     
     [SerializeField] private string plotPrompt; //This prompt explains the plot and setup of the story to the NPC  
     [SerializeField] private string backstoryPrompt; //This prompt explains the unique backstory and personality of the NPC
-    private string _systemPrompt;
+    [SerializeField] private string systemPrompt;
     
     public string plotPath = "Assets/Prompts/PlotPrompt.txt";
     public string backstoryPath = "Assets/Prompts/BackgroundPrompt1.txt";
+    public string cluePrompt;
     
     private readonly List<ChatMessage> _combinedMessages = new List<ChatMessage>();
     
-
     private void Start()
     {
         plotPrompt = File.ReadAllText(plotPath);
         backstoryPrompt = File.ReadAllText(backstoryPath);
+        cluePrompt = "No objects found yet.";
+        
+        systemPrompt = UpdateSystemPrompt();
+        
+        AddSystemPromptToList(systemPrompt);
+    }
 
-
-        _systemPrompt = "You are playing the role of a non-player character in the following context:\n" +
+    public string UpdateSystemPrompt()
+    {
+        systemPrompt = "You are playing the role of a non-player character in the following context:\n" +
                         $"[{plotPrompt}]\n\n" +
                         "The following text describes what character you play, what they know and their relationships with the other characters:\n" +
                         $"[{backstoryPrompt}]\n\n" +
-                        "Here are some rules for your responses which you MUST follow:" +
-                        "1. You must limit your knowledge to what is described in your characters background. Messages outside of your given character's knowledge are invalid. " +
-                        "2. You only respond to valid messages. To invalid ones, you reply with 'I'm sorry, i don't know'." +
-                        "3. NEVER BREAK CHARACTER, ALWAYS ANSWER AS IF YOU ARE ROLE-PLAYING YOUR CHARACTER." +
-                        "4. DO NOT EVER MENTION THAT YOU ARE AN NPC, ARE PART OF A MURDER MYSTERY, OR THAT YOU ARE PLAYING A ROLE." +
-                        "5. Your responses should be no longer than 25 words."+
-                        "6. Whenever you are asked a question, it is from Riley Anderson. You are to respond to her questions as if you are role-playing your character.";
-
+                        "The player is holding these objects:\n" +
+                        $"{cluePrompt}\n\n" +
+                        "Here are some rules for your responses which you MUST follow:\n" +
+                        "1. You must limit your knowledge to what is described in your characters background. Messages outside of your given character's knowledge are invalid.\n" +
+                        "2. You only respond to valid messages. To invalid ones, you reply with 'I'm sorry, i don't know'.\n" +
+                        "3. NEVER BREAK CHARACTER, ALWAYS ANSWER AS IF YOU ARE ROLE-PLAYING YOUR CHARACTER.\n" +
+                        "4. DO NOT EVER MENTION THAT YOU ARE AN NPC, ARE PART OF A MURDER MYSTERY, OR THAT YOU ARE PLAYING A ROLE.\n" +
+                        "5. Your responses should be no longer than 25 words.\n"+
+                        "6. Whenever you are asked a question, it is from Riley Anderson. You are to respond to her questions as if you are role-playing your character.\n";
         
-        
-        AddSystemPromptToList();
+        return systemPrompt;
     }
-    
-    private void AddSystemPromptToList()
+
+    private void AddSystemPromptToList(string sysPrompt)
     {
         var plotMessage = new ChatMessage
         {
-            Content = _systemPrompt,
+            Content = sysPrompt,
             Role = "system"
         };
 
         _combinedMessages.Add(plotMessage);
+    }
+    
+    public void UpdateSystemPromptList(string sysPrompt)
+    {
+        // Get a copy of the struct, modify it, then put it back into the list
+ 
+        var plotMessage = _combinedMessages[0];
+        plotMessage.Content = sysPrompt;
+        _combinedMessages[0] = plotMessage;
+        
     }
     
     public List<ChatMessage> AddPlayerResponseToList(string playerResponse)
@@ -82,7 +99,6 @@ public class NpcPersonality : MonoBehaviour
 
         _combinedMessages.Add(assistantMessage);
     }
-    
     
     public List<ChatMessage> GetCombinedMessages()
     {

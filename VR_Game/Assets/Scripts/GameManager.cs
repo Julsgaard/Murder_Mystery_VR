@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
     public string[] availableMicrophones;
     public string selectedMicrophone;
 
-    
+    //public List<Clues> clues = new List<Clues>();
+
     
     // Start is called before the first frame update
     void Awake()
@@ -22,7 +23,7 @@ public class GameManager : MonoBehaviour
         
         EnableVR();
 
-        CheckForVrOrNonVrPlayer();
+        //CheckForVrOrNonVrPlayer();
     }
 
     private void SelectMicrophone()
@@ -80,7 +81,7 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    private void CheckForVrOrNonVrPlayer()
+    /*private void CheckForVrOrNonVrPlayer()
     {
         if (enableVR)
         {
@@ -90,7 +91,7 @@ public class GameManager : MonoBehaviour
         {
             GameObject playerObject = nonPlayerObject;
         }
-    }
+    }*/
 }
 
 
