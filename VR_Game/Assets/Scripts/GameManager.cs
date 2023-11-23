@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private ScreenFade screenFade;
+    [SerializeField] private Canvas canvas;
+    [SerializeField] private Camera cameraVR;
+    [SerializeField] private Camera cameraNon;
+    
     // array of GameObjects that belong to the player
     public GameObject vrPlayerObject;
     public GameObject nonPlayerObject;
@@ -24,6 +29,15 @@ public class GameManager : MonoBehaviour
         EnableVR();
 
         //CheckForVrOrNonVrPlayer();
+    }
+    
+    void Start()
+    {
+        //IntroScreen();
+
+        //string endText = WinOrLose("Jens Johnson");
+        
+        //EndScreen(endText);
     }
 
     private void SelectMicrophone()
@@ -72,13 +86,44 @@ public class GameManager : MonoBehaviour
         {
             vrPlayerObject.SetActive(true);
             nonPlayerObject.SetActive(false);
+
+            canvas.worldCamera = cameraVR; // Set the canvas world camera to the VR camera
         }
         // if enableVR is false, then disable the vrPlayerObject and enable the playerObject
         else
         {
             vrPlayerObject.SetActive(false);
             nonPlayerObject.SetActive(true);
+            
+            canvas.worldCamera = cameraNon; // Set the canvas world camera to the non-VR camera
         }
+    }
+    
+    private void IntroScreen()
+    {
+        // Add code for intro screen here
+    }
+    
+    public void EndScreen(string endText)
+    {
+        StartCoroutine(screenFade.FadeToBlack());
+        StartCoroutine(screenFade.FadeInText(endText));
+    }
+    
+    public string WinOrLose(string npcName)
+    {
+        string outcomeText = "";
+        
+        if (npcName == "Jens Johnson")
+        {
+            outcomeText = npcName +" was the murderer";
+        }
+        else
+        {
+            outcomeText = npcName + " was not the murderer";
+        }
+
+        return outcomeText;
     }
     
     /*private void CheckForVrOrNonVrPlayer()
