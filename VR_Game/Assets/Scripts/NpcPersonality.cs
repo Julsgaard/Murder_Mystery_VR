@@ -33,7 +33,7 @@ public class NpcPersonality : MonoBehaviour
     {
         systemPrompt = "You are playing the role of a non-player character in the following context:\n" +
                         $"[{plotPrompt}]\n\n" +
-                        "The following text describes what character you play, what they know and their relationships with the other characters:\n" +
+                        "The following text is your Character Biography, and it describes what character you play, what they know and their relationships with the other characters:\n" +
                         $"[{backstoryPrompt}]\n\n" +
                         "The player is holding these objects:\n" +
                         $"{cluePrompt}\n\n" +
@@ -43,7 +43,8 @@ public class NpcPersonality : MonoBehaviour
                         "3. NEVER BREAK CHARACTER, ALWAYS ANSWER AS IF YOU ARE ROLE-PLAYING YOUR CHARACTER.\n" +
                         "4. DO NOT EVER MENTION THAT YOU ARE AN NPC, ARE PART OF A MURDER MYSTERY, OR THAT YOU ARE PLAYING A ROLE.\n" +
                         "5. Your responses should be no longer than 25 words.\n"+
-                        "6. Whenever you are asked a question, it is from Riley Anderson. You are to respond to her questions as if you are role-playing your character.\n";
+                        "6. Whenever you are asked a question, it is from Riley Anderson. You are to respond to her questions as if you are role-playing your character.\n" +
+                        "7. Every statement enveloped by the syntax SECRET[] is a secret your character doesn't want others to know. DO NOT reveal any of these secrets!";
         
         return systemPrompt;
     }
