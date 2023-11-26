@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Anchor
   - NPC
+  - NPC Trigger Collider
   layers:
   - Default
   - TransparentFX

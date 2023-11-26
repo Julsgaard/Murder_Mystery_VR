@@ -25,12 +25,15 @@ public class NpcCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("NPC"))
+        if (other.CompareTag("NPC Trigger Collider"))
         {
             // Player has entered the proximity
-            Debug.Log($"Player is now in proximity: {other.gameObject.name}");
             _isPlayerInProximity = true;
-            _currentNpc = other.gameObject;
+            
+            _currentNpc = other.transform.parent.gameObject;
+            
+            Debug.Log($"Player is now in proximity: {_currentNpc.name}");
+
             
             playerEnteredNpcRange?.Invoke();
         }
@@ -38,7 +41,7 @@ public class NpcCollision : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("NPC"))
+        if (other.CompareTag("NPC Trigger Collider"))
         {
             // Player has entered the proximity
             
@@ -50,10 +53,10 @@ public class NpcCollision : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("NPC"))
+        if (other.CompareTag("NPC Trigger Collider"))
         {
             // Player has exited the proximity
-            Debug.Log($"Player exited the proximity: {other.gameObject.name}");
+            Debug.Log($"Player exited the proximity: {_currentNpc.name}");
             _isPlayerInProximity = false;
             //_currentNpc = null; <- Not sure if we should set this, it's easier if we don't but unsure if it'll cause bugs
             
@@ -75,7 +78,7 @@ public class NpcCollision : MonoBehaviour
             Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.yellow);
 
             // Check if the ray hits an object with the "NPC" tag
-            if (hit.collider.CompareTag("NPC"))
+            if (hit.collider.CompareTag("NPC Trigger Collider"))
             {
                 Debug.Log("Hit an NPC: " + hit.collider.name);
                 // You can access the specific NPC that was hit using hit.collider

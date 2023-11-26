@@ -1,3 +1,5 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -6,10 +8,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Canvas canvas;
     [SerializeField] private Camera cameraVR;
     [SerializeField] private Camera cameraNon;
-    
+    [SerializeField] private TextMeshPro endScreenTMP;
+
     // array of GameObjects that belong to the player
     public GameObject vrPlayerObject;
+    public GameObject xrOrigin;
     public GameObject nonPlayerObject;
+    
 
     public bool enableVR;// Whether VR is enabled or not}
 
@@ -29,6 +34,7 @@ public class GameManager : MonoBehaviour
         EnableVR();
 
         //CheckForVrOrNonVrPlayer();
+        
     }
     
     void Start()
@@ -99,15 +105,57 @@ public class GameManager : MonoBehaviour
         }
     }
     
+    public void TeleportPlayer()
+    {
+        //StartCoroutine(screenFade.FadeToBlack());
+
+        if (enableVR)
+        {
+            xrOrigin.transform.localPosition = new Vector3(0, 0, 0);
+            vrPlayerObject.transform.position = new Vector3(-8.8f,5.4f,-19.0f);
+        }
+        else
+        {
+            nonPlayerObject.transform.position = new Vector3(-8.8f,5.4f+1,-19.0f);
+        }
+        
+        //StartCoroutine(screenFade.FadeFromBlack());
+    }
+
     private void IntroScreen()
     {
-        // Add code for intro screen here
+        
     }
     
     public void EndScreen(string endText)
     {
-        StartCoroutine(screenFade.FadeToBlack());
-        StartCoroutine(screenFade.FadeInText(endText));
+        //StartCoroutine(screenFade.FadeToBlack());
+        //StartCoroutine(screenFade.FadeInText(endText));
+        
+        //StartCoroutine(PauseAfterDelayCoroutine(5f));
+        
+        endScreenTMP.text = endText;
+        
+        if (enableVR)
+        {
+            xrOrigin.transform.localPosition = new Vector3(0, 0, 0);
+            vrPlayerObject.transform.position = new Vector3(-11.27f,-17.59f,-21.29f);
+            vrPlayerObject.transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        else
+        {
+            nonPlayerObject.transform.position = new Vector3(-11.27f,-17.59f+1,-21.29f);
+            nonPlayerObject.transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+    }
+    
+    private IEnumerator PauseAfterDelayCoroutine(float delay)
+    {
+        // Wait for the specified delay
+        yield return new WaitForSeconds(delay);
+
+        // Pause the game
+        Time.timeScale = 0;
     }
     
     public string WinOrLose(string npcName)
@@ -126,17 +174,6 @@ public class GameManager : MonoBehaviour
         return outcomeText;
     }
     
-    /*private void CheckForVrOrNonVrPlayer()
-    {
-        if (enableVR)
-        {
-            GameObject playerObject = vrPlayerObject;
-        }
-        else
-        {
-            GameObject playerObject = nonPlayerObject;
-        }
-    }*/
 }
 
 
