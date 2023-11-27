@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private ScreenFade screenFade;
+    [SerializeField] private GameTimer gameTimer;
     [SerializeField] private Canvas canvas;
     [SerializeField] private Camera cameraVR;
     [SerializeField] private Camera cameraNon;
@@ -14,7 +15,9 @@ public class GameManager : MonoBehaviour
     public GameObject vrPlayerObject;
     public GameObject xrOrigin;
     public GameObject nonPlayerObject;
-    
+
+    public GameObject pushToTalkToolTip;
+    public GameObject uiPressToolTip;
 
     public bool enableVR;// Whether VR is enabled or not}
 
@@ -35,6 +38,7 @@ public class GameManager : MonoBehaviour
 
         //CheckForVrOrNonVrPlayer();
         
+        CheckForDialogueOptions();
     }
     
     void Start()
@@ -92,7 +96,7 @@ public class GameManager : MonoBehaviour
         {
             vrPlayerObject.SetActive(true);
             nonPlayerObject.SetActive(false);
-
+            
             canvas.worldCamera = cameraVR; // Set the canvas world camera to the VR camera
         }
         // if enableVR is false, then disable the vrPlayerObject and enable the playerObject
@@ -105,26 +109,45 @@ public class GameManager : MonoBehaviour
         }
     }
     
+    private void CheckForDialogueOptions()
+    {
+        // If dialogue options are enabled, then disable the push to talk tool tip and enable the UI press tool tip
+        if (enableDialogueOptions)
+        {
+            pushToTalkToolTip.SetActive(false);
+            uiPressToolTip.SetActive(true);
+        }
+        // If dialogue options are disabled, then enable the push to talk tool tip and disable the UI press tool tip
+        else
+        {
+            pushToTalkToolTip.SetActive(true);
+            uiPressToolTip.SetActive(false);
+        }
+    }
+    
     public void TeleportPlayer()
     {
         //StartCoroutine(screenFade.FadeToBlack());
 
         if (enableVR)
         {
+            // Starts the watch timer
+            gameTimer.StartTimer();
+            
+            // Moved the VR player to the correct position
             xrOrigin.transform.localPosition = new Vector3(0, 0, 0);
-            vrPlayerObject.transform.position = new Vector3(-8.8f,5.4f,-19.0f);
+            //vrPlayerObject.transform.position = new Vector3(-8.8f,5.4f,-19.0f);
+            vrPlayerObject.transform.position = new Vector3(7.42f, 5.88f, -16.14f);
+            vrPlayerObject.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else
         {
-            nonPlayerObject.transform.position = new Vector3(-8.8f,5.4f+1,-19.0f);
+            // Moves the non-VR player to the correct position
+            //nonPlayerObject.transform.position = new Vector3(-8.8f,5.4f+1,-19.0f);
+            nonPlayerObject.transform.position = new Vector3(7.42f, 5.88f+1, -16.14f);
         }
         
         //StartCoroutine(screenFade.FadeFromBlack());
-    }
-
-    private void IntroScreen()
-    {
-        
     }
     
     public void EndScreen(string endText)
@@ -147,15 +170,6 @@ public class GameManager : MonoBehaviour
             nonPlayerObject.transform.position = new Vector3(-11.27f,-17.59f+1,-21.29f);
             nonPlayerObject.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
-    }
-    
-    private IEnumerator PauseAfterDelayCoroutine(float delay)
-    {
-        // Wait for the specified delay
-        yield return new WaitForSeconds(delay);
-
-        // Pause the game
-        Time.timeScale = 0;
     }
     
     public string WinOrLose(string npcName)
