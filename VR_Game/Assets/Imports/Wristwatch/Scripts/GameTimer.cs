@@ -34,11 +34,10 @@ public class GameTimer : MonoBehaviour {
 	private TMPro.TextMeshPro digiDisplay;
 
 	private DateTime startTime;
-	// sets the gametime to 6, this however means the game will prop break if you play it between 24:00 and 6:00... 
 	private DateTime gameBeginTime = System.DateTime.Today.AddHours(6);
     // Use this for initialization
     void Start () {
-		// startTimer();
+		//startTimer();
 		
 		// sets up the gameobject to be a digtial or analogue clock
 		switch(typeOfWatch)
