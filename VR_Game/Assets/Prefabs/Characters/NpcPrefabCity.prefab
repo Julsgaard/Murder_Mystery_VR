@@ -2656,8 +2656,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plotPrompt: 
   backstoryPrompt: 
+  systemPrompt: 
   plotPath: Assets/Prompts/PlotPrompt.txt
   backstoryPath: Assets/Prompts/ChrisWalkerBackground.txt
+  cluePrompt: 
 --- !u!114 &2971735356472194087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3230,7 +3232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c430f382484144e925c097c2d33cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 0
+  m_Weight: 0.5
   m_Data:
     m_ConstrainedObject: {fileID: 369387832701791011}
     m_SourceObjects:
