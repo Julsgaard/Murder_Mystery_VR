@@ -4,40 +4,43 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private ScreenFade screenFade;
+    // Scripts 
+    //[SerializeField] private ScreenFade screenFade;
     [SerializeField] private GameTimer gameTimer;
-    [SerializeField] private Canvas canvas;
-    [SerializeField] private Camera cameraVR;
-    [SerializeField] private Camera cameraNon;
+    
+    //[SerializeField] private Canvas canvas;
+    //[SerializeField] private Camera cameraVR;
+    //[SerializeField] private Camera cameraNon;
+    
+    // End screen text
     [SerializeField] private TextMeshPro endScreenTMP;
 
-    // array of GameObjects that belong to the player
+    // GameObjects that belong to the player
     public GameObject vrPlayerObject;
     public GameObject xrOrigin;
     public GameObject nonPlayerObject;
-
+    
+    // GameObjects that belong to the control tutorial in the intro scene
     public GameObject pushToTalkToolTip;
     public GameObject uiPressToolTip;
 
     public bool enableVR;// Whether VR is enabled or not}
-
     public bool enableDialogueOptions; // Whether dialogue options are enabled or not
 
+    // Microphone variables
     public string[] availableMicrophones;
     public string selectedMicrophone;
-
-    //public List<Clues> clues = new List<Clues>();
-
     
-    // Start is called before the first frame update
+    
     void Awake()
     {
+        // Selects the microphone
         SelectMicrophone();
         
+        // Enables VR if enableVR is true, otherwise enables playercontroller for testing
         EnableVR();
-
-        //CheckForVrOrNonVrPlayer();
         
+        // Checks if dialogue options are enabled or not and enables/disables the correct tool tips
         CheckForDialogueOptions();
     }
     
@@ -97,7 +100,7 @@ public class GameManager : MonoBehaviour
             vrPlayerObject.SetActive(true);
             nonPlayerObject.SetActive(false);
             
-            canvas.worldCamera = cameraVR; // Set the canvas world camera to the VR camera
+            //canvas.worldCamera = cameraVR; // Set the canvas world camera to the VR camera
         }
         // if enableVR is false, then disable the vrPlayerObject and enable the playerObject
         else
@@ -105,7 +108,7 @@ public class GameManager : MonoBehaviour
             vrPlayerObject.SetActive(false);
             nonPlayerObject.SetActive(true);
             
-            canvas.worldCamera = cameraNon; // Set the canvas world camera to the non-VR camera
+            //canvas.worldCamera = cameraNon; // Set the canvas world camera to the non-VR camera
         }
     }
     
