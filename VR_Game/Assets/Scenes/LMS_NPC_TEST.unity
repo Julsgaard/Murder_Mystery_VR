@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2651,26 +2651,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb08f2946f8d6444f8ceee9b4bd8c045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onResponse:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 713381279}
-        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-        m_MethodName: set_text
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  recordButton: {fileID: 1004358542}
-  progressBar: {fileID: 148433625}
-  message: {fileID: 1591349516}
-  dropdown: {fileID: 335495672}
-  speech: {fileID: 2132766964}
 --- !u!4 &1591449806
 Transform:
   m_ObjectHideFlags: 0
