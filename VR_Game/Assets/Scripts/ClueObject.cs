@@ -24,7 +24,7 @@ public class ClueObject : MonoBehaviour
         }
         
         // Start the particle system when the clue is not found
-        if (!isFound)
+        if (!isFound && clueParticles != null)
         {
             clueParticles.Play();
         }
@@ -38,7 +38,10 @@ public class ClueObject : MonoBehaviour
             Debug.Log($"Player found clue: {gameObject.name}");
             
             // Stop the particle system when the clue is found
-            clueParticles.Stop();
+            if (clueParticles != null)
+            {
+                clueParticles.Stop();
+            }
 
             // For each NPC in npcDescriptions, add the clue description to their system prompt
             foreach (var npcDescription in npcDescriptions)
