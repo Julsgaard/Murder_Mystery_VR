@@ -12,6 +12,7 @@ public class DialoguePanelSpawner : MonoBehaviour
 
     private Vector3 _panelPos;
     private Transform _NPCHipTransform;
+    private bool _isColliding = false;
     void Start()
     {
         //Search for the GameManager script
@@ -35,8 +36,11 @@ public class DialoguePanelSpawner : MonoBehaviour
 
     private void Update()
     {
-        _panelPos.y = _NPCHipTransform.position.y + panelOffsetY;
-        transform.position = _panelPos;
+        if (_isColliding)
+        {
+            _panelPos.y = _NPCHipTransform.position.y + panelOffsetY;
+            transform.position = _panelPos;
+        }
     }
 
     private void EnableDialogueOptions()
@@ -50,11 +54,13 @@ public class DialoguePanelSpawner : MonoBehaviour
 
         _NPCHipTransform = _npcCollision.GetCurrentNpc().transform.GetChild(1).transform.GetChild(0).transform;
 
+        _isColliding = true;
         _panel.SetActive(true);
     }
     
     private void DisableDialogueOptions()
     {
+        _isColliding = false;
         _panel.SetActive(false);
     }
 }
