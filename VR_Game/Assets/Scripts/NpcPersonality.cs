@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using OpenAI;
@@ -15,19 +16,23 @@ public class NpcPersonality : MonoBehaviour
     public string plotPath = "Assets/Prompts/PlotPrompt.txt";
     public string backstoryPath = "Assets/Prompts/BackgroundPrompt1.txt";
     public string cluePrompt;
+    public bool hasFoundFirstClue;
+
     
     private readonly List<ChatMessage> _combinedMessages = new List<ChatMessage>();
-    
-    private void Start()
+
+    private void Awake()
     {
         plotPrompt = File.ReadAllText(plotPath);
         backstoryPrompt = File.ReadAllText(backstoryPath);
-        cluePrompt = "No objects found yet.";
+        cluePrompt = "";
+        hasFoundFirstClue = false;
         
         systemPrompt = UpdateSystemPrompt();
         
-        AddSystemPromptToList(systemPrompt);
+        AddSystemPromptToList(systemPrompt);    
     }
+
 
     public string UpdateSystemPrompt()
     {
