@@ -27,11 +27,11 @@ public class NpcAnimation : MonoBehaviour
         _multiAimConstraint = headAim.GetComponent<MultiAimConstraint>();
         
         
-        GameObject currentPlayer = GameObject.FindGameObjectWithTag("Player");
+        GameObject currentCamera = GameObject.FindGameObjectWithTag("MainCamera");
         // Get existing WeightedTransformArray
         WeightedTransformArray weightedTransforms = _multiAimConstraint.data.sourceObjects;
         // Add the new target to the existing WeightedTransformArray
-        weightedTransforms.Add(new WeightedTransform(currentPlayer.transform, 1f));  // 1f is the weight
+        weightedTransforms.Add(new WeightedTransform(currentCamera.transform, 1f));  // 1f is the weight
         // Update the MultiAimConstraint's sourceObjects
         _multiAimConstraint.data.sourceObjects = weightedTransforms;
         

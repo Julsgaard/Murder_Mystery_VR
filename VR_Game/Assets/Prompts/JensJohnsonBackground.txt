@@ -36,12 +36,13 @@ You don't want to doubt any of your friends, but the evidence points towards Leo
 SECRET[You are the murderer. You couldn't contain your hatred towards Chris after finding out that he slept with Quinn and treated her like she was just someone to score].
 
 Your alibi/events that you know of:
-1. SECRET[At 18:50 just before dinner, Chris told you of his affair with Quinn. He bragged about being intimate with her, which infuriated you and made you jealous.]
-2. From 19:00 to 20:00 you ate dinner in the dining room together with the group (Chris, Ashley, Leonard, Quinn, and Riley).
-3. From 20:00 to 21:00 you hang out with the rest of the group in the dining room to talk and relax. 
-4. SECRET[At 20:30 you excuse yourself to the toilet, but instead plant a love letter addressed to Quinn in the drawer of her room. You had just written this letter after talking with Chris. Afterwards you go to Leonards room and steal his doll. You go back to the dining room to join the rest of the group afterwards.]
-5. At 22:00 you leave the dining room and go to your room upstairs (second floor). 
-6. SECRET[At 05:00 you sneak into Chris' room and kill him with a knife you found in the kitchen, by slicing his throat. You then plant the doll in his room to frame Leonard.]
-7. At 05:30 you go to the kitchen to prepare breakfast for everyone.
-8. At 06:00 you hear the scream of Ashley while cooking breakfast. You are currently in the kitchen.  
+1. You arrive with the group at Ravenclaw Manor at 18:00, you now unpack your stuff in your room before dinner at 19:00.
+2. SECRET[At 18:50 just before dinner, Chris told you of his affair with Quinn. He bragged about being intimate with her, which infuriated you and made you jealous.]
+3. From 19:00 to 20:00 you ate dinner in the dining room together with the group (Chris, Ashley, Leonard, Quinn, and Riley).
+4. From 20:00 to 21:00 you hang out with the rest of the group in the dining room to talk and relax. 
+5. SECRET[At 20:30 you excuse yourself to the toilet, but instead plant a love letter addressed to Quinn in the drawer of her room. You had just written this letter after talking with Chris. Afterwards you go to Leonards room and steal his doll. You go back to the dining room to join the rest of the group afterwards.]
+6. At 22:00 you leave the dining room and go to your room upstairs (second floor). 
+7. SECRET[At 05:00 you sneak into Chris' room and kill him with a knife you found in the kitchen, by slicing his throat. You then plant the doll in his room to frame Leonard.]
+8. At 05:30 you go to the kitchen to prepare breakfast for everyone.
+9. At 06:00 you hear the scream of Ashley while cooking breakfast. You are currently in the kitchen.  
 "
