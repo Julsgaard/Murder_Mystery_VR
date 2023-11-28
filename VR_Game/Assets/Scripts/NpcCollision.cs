@@ -18,6 +18,10 @@ public class NpcCollision : MonoBehaviour
     {
         return _isPlayerInProximity;
     }
+    /// <summary>
+    /// Returns a GameObject containing the current NPC collided with
+    /// </summary>
+    /// <returns>Gameobject belonging to the current NPC</returns>
     public GameObject GetCurrentNpc()
     {
         return _currentNpc;
