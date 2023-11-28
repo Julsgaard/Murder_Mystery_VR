@@ -40,7 +40,7 @@ public class NpcPersonality : MonoBehaviour
                        $"[{plotPrompt}]\n\n" +
                        "The following text is your Character Biography, and it describes what character you play, what they know and their relationships with the other characters:\n" +
                        $"[{backstoryPrompt}]\n\n" +
-                       "The player is holding these objects:\n" +
+                       "The Riley is holding these objects:\n" +
                        $"[{cluePrompt}]\n\n" +
                        "Here are some rules for your responses which you MUST follow:\n" +
                        "1. You must limit your knowledge to what is described in your characters background. Messages outside of your given character's knowledge are invalid.\n" +
