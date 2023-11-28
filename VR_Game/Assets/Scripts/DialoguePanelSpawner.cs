@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class DialoguePanelSpawner : MonoBehaviour
 {
     private GameManager _gameManager;
     private NpcCollision _npcCollision;
     private GameObject _panel; //Used to store the reference to the panel gameobject that contains all of the buttons
-    [SerializeField] private float panelOffsetY, panelOffsetZ;
+    [SerializeField] private float panelOffsetY, panelOffsetZ, panelOffsetX, panelRotationY;
+
+    private Vector3 _panelPos;
+    private Transform _NPCHipTransform;
+    private bool _isColliding = false;
     void Start()
     {
         //Search for the GameManager script
@@ -28,21 +33,34 @@ public class DialoguePanelSpawner : MonoBehaviour
         _npcCollision.playerEnteredNpcRange += EnableDialogueOptions;
         _npcCollision.playerExitedNpcRange += DisableDialogueOptions;
     }
-    
+
+    private void Update()
+    {
+        if (_isColliding)
+        {
+            _panelPos.y = _NPCHipTransform.position.y + panelOffsetY;
+            transform.position = _panelPos;
+        }
+    }
+
     private void EnableDialogueOptions()
     {
         //"Spawn" the dialogue options at the current npc position
-        gameObject.transform.position = _npcCollision.GetCurrentNpc().transform.position;
+        _panelPos = _npcCollision.GetCurrentNpc().transform.TransformPoint(panelOffsetX,panelOffsetY,panelOffsetZ);
+
         //Make sure it is rotated correctly (So it faces the same direction as the npc)
         gameObject.transform.rotation = _npcCollision.GetCurrentNpc().transform.rotation;
-        //Move it a bit up and forward so it doesn't clip with the npc
-        gameObject.transform.Translate(Vector3.up * panelOffsetY);
-        gameObject.transform.Translate(Vector3.forward * panelOffsetZ);
+        transform.Rotate(Vector3.up * -panelRotationY);
+
+        _NPCHipTransform = _npcCollision.GetCurrentNpc().transform.GetChild(1).transform.GetChild(0).transform;
+
+        _isColliding = true;
         _panel.SetActive(true);
     }
     
     private void DisableDialogueOptions()
     {
+        _isColliding = false;
         _panel.SetActive(false);
     }
 }
