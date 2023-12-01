@@ -12,6 +12,8 @@ public class ButtonScript : MonoBehaviour
     public List<Button> buttonList = new List<Button>();
     public List<TMP_Text> buttonTextList = new List<TMP_Text>();
     private int _amountOfEnabledButtons;
+    private List<String> _clueList = new List<string>();
+    
 
     public Button backButton; //Button to handle going back to the defaultQuestions
 
@@ -101,12 +103,13 @@ public class ButtonScript : MonoBehaviour
                 backButton.gameObject.SetActive(true);
                 break;
             case DialogueOptionState.ClueQuestions:
-                _amountOfEnabledButtons = 4;
+                _amountOfEnabledButtons = _clueList.Count;
                 UpdateButtonPositions(_amountOfEnabledButtons);
-                buttonTextList[0].text = "Clue 1";
-                buttonTextList[1].text = "Clue 2";
-                buttonTextList[2].text = "Clue 3";
-                buttonTextList[3].text = "Clue 4";
+                //Loop over the clueList and set the text of each button to the name of the clue
+                for (int i = 0; i < _clueList.Count; i++)
+                {
+                    buttonTextList[i].text = _clueList[i];
+                }
                 backButton.gameObject.SetActive(true);
                 break;
             case DialogueOptionState.EventQuestions:
@@ -202,5 +205,10 @@ public class ButtonScript : MonoBehaviour
         _currentState = DialogueOptionState.DefaultQuestions;
         
         UpdateButtonText();
+    }
+
+    public void updateClueList(GameObject clueGameobject)
+    {
+        _clueList.Add(clueGameobject.name);
     }
 }
