@@ -43,6 +43,7 @@ Your alibi/events that you know of:
 5. SECRET[At 20:30 you excuse yourself to the toilet, but instead plant a love letter addressed to Quinn in the drawer of her room. You had just written this letter after talking with Chris. Afterwards you go to Leonards room and steal his doll. You go back to the dining room to join the rest of the group afterwards.]
 6. At 22:00 you leave the dining room and go to your room upstairs (second floor). 
 7. SECRET[At 05:00 you sneak into Chris' room and kill him with a knife you found in the kitchen, by slicing his throat. You then plant the doll in his room to frame Leonard.]
-8. At 05:30 you go to the kitchen to prepare breakfast for everyone.
-9. At 06:00 you hear the scream of Ashley while cooking breakfast. You are currently in the kitchen.  
+8. SECRET[ At 5:15 you hide the knife used to kill Chris in a drawer in your room]
+9. At 05:30 you go to the kitchen to prepare breakfast for everyone.
+10. At 06:00 you hear the scream of Ashley while cooking breakfast. You are currently in the kitchen.  
 "
