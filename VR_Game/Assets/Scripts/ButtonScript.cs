@@ -112,14 +112,14 @@ public class ButtonScript : MonoBehaviour
             case DialogueOptionState.EventQuestions:
                 _amountOfEnabledButtons = 4;
                 UpdateButtonPositions(_amountOfEnabledButtons);
-                buttonTextList[0].text = "The murder";
-                buttonTextList[1].text = "Your alibi";
-                buttonTextList[2].text = "";
-                buttonTextList[3].text = "";
+                buttonTextList[0].text = "What do you think of the murder?";
+                buttonTextList[1].text = "What were you doing before the murder?";
+                buttonTextList[2].text = "What were you doing during the night?";
+                buttonTextList[3].text = "What were you doing last evening?";
                 backButton.gameObject.SetActive(true);
                 break;
             case DialogueOptionState.BackstoryQuestions:
-                _amountOfEnabledButtons = 4;
+                _amountOfEnabledButtons = 2;
                 UpdateButtonPositions(_amountOfEnabledButtons);
                 buttonTextList[0].text = "Who are you?";
                 buttonTextList[1].text = "What are your interests?";
