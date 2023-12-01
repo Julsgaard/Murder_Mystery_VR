@@ -31,10 +31,9 @@ public class ClueObject : MonoBehaviour
     }
 
     // When the player enters the trigger collider, add the clue description to the NPC's system prompt
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        if (other.CompareTag("Player") && !isFound)
-        {
+        if (other.gameObject.CompareTag("Player") && !isFound)        {
             Debug.Log($"Player found clue: {gameObject.name}");
             
             // Stop the particle system when the clue is found
