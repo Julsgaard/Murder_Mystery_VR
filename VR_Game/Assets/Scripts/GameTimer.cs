@@ -83,7 +83,7 @@ public class GameTimer : MonoBehaviour
 	private void TimerFinished()
 	{
 		// Sets the endText
-		string endText = "Time has run out and everyone has been arrested by the police";
+		string endText = "Thank you for playing!";
 		
 		// Ends the game
 		gameManager.EndScreen(endText);
