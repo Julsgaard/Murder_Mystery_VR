@@ -138,47 +138,38 @@ public class ButtonScript : MonoBehaviour
     //Sorry for det du kommer til at se nu
     private void UpdateButtonPositions(int amountOfButtons)
     {
+        for (int i = 0; i < buttonList.Count; i++)
+        {
+            if (i < amountOfButtons)
+            {
+                buttonList[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                buttonList[i].gameObject.SetActive(false);
+            }
+        }
         switch (amountOfButtons)
         {
             case 1:
-                buttonList[1].gameObject.SetActive(false);
-                buttonList[2].gameObject.SetActive(false);
-                buttonList[3].gameObject.SetActive(false);
-                buttonList[4].gameObject.SetActive(false);
-                buttonList[5].gameObject.SetActive(false);
-                
                 buttonList[0].GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 0f, 0f);
                 break;
             case 2:
-                buttonList[3].gameObject.SetActive(false);
-                buttonList[4].gameObject.SetActive(false);
-                buttonList[5].gameObject.SetActive(false);
-                buttonList[6].gameObject.SetActive(false);
-                
                 buttonList[0].GetComponent<RectTransform>().anchoredPosition = new Vector3(-200, -30f, 0f);
                 buttonList[1].GetComponent<RectTransform>().anchoredPosition = new Vector3(200f, -30f, 0);
                 break;
             case 3:
-                buttonList[3].gameObject.SetActive(false);
-                buttonList[4].gameObject.SetActive(false);
-                buttonList[5].gameObject.SetActive(false);
-                
                 buttonList[0].GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 90, 0f);
                 buttonList[1].GetComponent<RectTransform>().anchoredPosition = new Vector3(200f, -30f, 0);
                 buttonList[2].GetComponent<RectTransform>().anchoredPosition = new Vector3(-200, -30f, 0f);
                 break;
             case 4:
-                buttonList[4].gameObject.SetActive(false);
-                buttonList[5].gameObject.SetActive(false);
-                
                 buttonList[0].GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 90f, 0f);
                 buttonList[1].GetComponent<RectTransform>().anchoredPosition = new Vector3(200f, -30f, 0);
                 buttonList[2].GetComponent<RectTransform>().anchoredPosition = new Vector3(0, -150f, 0);
                 buttonList[3].GetComponent<RectTransform>().anchoredPosition = new Vector3(-200f, -30f, 0);
                 break;
             case 5:
-                buttonList[5].gameObject.SetActive(false);
-                
                 buttonList[0].GetComponent<RectTransform>().anchoredPosition = new Vector3(150, 90f, 0f);
                 buttonList[1].GetComponent<RectTransform>().anchoredPosition = new Vector3(200f, -30f, 0);
                 buttonList[2].GetComponent<RectTransform>().anchoredPosition = new Vector3(0, -150f, 0);
@@ -186,9 +177,6 @@ public class ButtonScript : MonoBehaviour
                 buttonList[4].GetComponent<RectTransform>().anchoredPosition = new Vector3(-150f, 90f, 0);
                 break;
             case 6:
-                buttonList[4].gameObject.SetActive(true);
-                buttonList[5].gameObject.SetActive(true);
-                
                 buttonList[0].GetComponent<RectTransform>().anchoredPosition = new Vector3(148.9001f, 101.6799f, 0);
                 buttonList[1].GetComponent<RectTransform>().anchoredPosition = new Vector3(172.88f, -27.82f, 0);
                 buttonList[2].GetComponent<RectTransform>().anchoredPosition = new Vector3(148.9001f, -162.1301f, 0);
