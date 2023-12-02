@@ -163,9 +163,9 @@ MonoBehaviour:
   m_RecycleDelayTime: 1
   m_HoverSocketSnapping: 0
   m_SocketSnappingRadius: 0.1
-  m_SocketScaleMode: 1
+  m_SocketScaleMode: 2
   m_FixedScale: {x: 1, y: 1, z: 1}
-  m_TargetBoundsSize: {x: 1, y: 1, z: 1}
+  m_TargetBoundsSize: {x: 1.5, y: 1.5, z: 1.5}
 --- !u!1 &5381344796067761868
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,9 +329,9 @@ MonoBehaviour:
   m_RecycleDelayTime: 1
   m_HoverSocketSnapping: 0
   m_SocketSnappingRadius: 0.1
-  m_SocketScaleMode: 1
+  m_SocketScaleMode: 2
   m_FixedScale: {x: 1, y: 1, z: 1}
-  m_TargetBoundsSize: {x: 1, y: 1, z: 1}
+  m_TargetBoundsSize: {x: 1.5, y: 1.5, z: 1.5}
 --- !u!1 &6097564497561528541
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,9 +582,9 @@ MonoBehaviour:
   m_RecycleDelayTime: 1
   m_HoverSocketSnapping: 0
   m_SocketSnappingRadius: 0.1
-  m_SocketScaleMode: 1
+  m_SocketScaleMode: 2
   m_FixedScale: {x: 1, y: 1, z: 1}
-  m_TargetBoundsSize: {x: 1, y: 1, z: 1}
+  m_TargetBoundsSize: {x: 1.5, y: 1.5, z: 1.5}
 --- !u!1 &6650683622999380364
 GameObject:
   m_ObjectHideFlags: 0
@@ -748,9 +748,9 @@ MonoBehaviour:
   m_RecycleDelayTime: 1
   m_HoverSocketSnapping: 0
   m_SocketSnappingRadius: 0.1
-  m_SocketScaleMode: 1
+  m_SocketScaleMode: 2
   m_FixedScale: {x: 1, y: 1, z: 1}
-  m_TargetBoundsSize: {x: 1, y: 1, z: 1}
+  m_TargetBoundsSize: {x: 1.5, y: 1.5, z: 1.5}
 --- !u!1 &8884267206795877978
 GameObject:
   m_ObjectHideFlags: 0
