@@ -19,7 +19,7 @@ public class DialogueRayVisibility : MonoBehaviour
         if (_gameManager.enableDialogueOptions == false)
             return; // if dialogue is disabled, we dont want rays either, so we just skip the setup
 
-        _npcCollision = GameObject.FindWithTag("Player").GetComponent<NpcCollision>();
+        _npcCollision = GameObject.Find("XR Origin (XR Rig)").GetComponent<NpcCollision>();
         _xrRayInteractor = transform.GetChild(2).gameObject.GetComponent<XRRayInteractor>();
 
         _npcCollision.playerEnteredNpcRange += EnableRay;

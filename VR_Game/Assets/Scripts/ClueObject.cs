@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -7,7 +8,7 @@ public class ClueObject : MonoBehaviour
     public List<NPCDescription> npcDescriptions = new List<NPCDescription>(); // Description for each NPC
     public bool isFound; // Whether the player has found this clue
     public ParticleSystem clueParticles; // The particle system for the clue
-    public ButtonScript ButtonScript;
+    public ButtonScript buttonScript;
 
 
     private int _counter = 1;
@@ -33,9 +34,9 @@ public class ClueObject : MonoBehaviour
     }
 
     // When the player enters the trigger collider, add the clue description to the NPC's system prompt
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("Player") && !isFound)
+        if (collision.collider.CompareTag("Player") && !isFound)
         {
             Debug.Log($"Player found clue: {gameObject.name}");
             
@@ -62,7 +63,7 @@ public class ClueObject : MonoBehaviour
 
             _counter++;
             isFound = true;
-            ButtonScript.updateClueList(gameObject);
+            buttonScript.updateClueList(gameObject);
         }
     }
 }

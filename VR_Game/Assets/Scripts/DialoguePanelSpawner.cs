@@ -22,7 +22,7 @@ public class DialoguePanelSpawner : MonoBehaviour
         _panel = gameObject.transform.Find("Panel").gameObject;
         
         //Search for the player gameobject by tag and get the NpcCollision script
-        _npcCollision = GameObject.FindWithTag("Player").GetComponent<NpcCollision>();
+        _npcCollision = GameObject.Find("XR Origin (XR Rig)").GetComponent<NpcCollision>();
         
         
         if (_gameManager.enableDialogueOptions == false)
