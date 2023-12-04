@@ -5,9 +5,9 @@ using UnityEngine.UIElements;
 
 public class DialoguePanelSpawner : MonoBehaviour
 {
-    private GameManager _gameManager;
-    private NpcCollision _npcCollision;
-    private GameObject _panel; //Used to store the reference to the panel gameobject that contains all of the buttons
+    [SerializeField] private GameManager _gameManager;
+    [SerializeField] private NpcCollision _npcCollision;
+    [SerializeField] private GameObject _panel; //Used to store the reference to the panel gameobject that contains all of the buttons
     [SerializeField] private float panelOffsetY, panelOffsetZ, panelOffsetX, panelRotationY;
 
     private Vector3 _panelPos;
@@ -15,20 +15,23 @@ public class DialoguePanelSpawner : MonoBehaviour
     private bool _isColliding = false;
     void Start()
     {
-        //Search for the GameManager script
-        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        // Only enable the dialogue options if dialogue options are enabled
+        if (!_gameManager.enableDialogueOptions)
+            return;
         
         //Search for the panel gameobject among children of the current gameobject by its name
         _panel = gameObject.transform.Find("Panel").gameObject;
-        
-        //Search for the player gameobject by tag and get the NpcCollision script
-        _npcCollision = GameObject.Find("XR Origin (XR Rig)").GetComponent<NpcCollision>();
-        
-        
-        if (_gameManager.enableDialogueOptions == false)
+
+        // Gets the NpcCollision script from the correct player object 
+        if (_gameManager.enableVR)
         {
-            gameObject.SetActive(false);
+            _npcCollision = GameObject.Find("XR Origin (XR Rig)").GetComponent<NpcCollision>();        
         }
+        else
+        {
+            _npcCollision = _gameManager.nonPlayerObject.GetComponent<NpcCollision>();
+        }
+   
         
         _npcCollision.playerEnteredNpcRange += EnableDialogueOptions;
         _npcCollision.playerExitedNpcRange += DisableDialogueOptions;
@@ -36,6 +39,10 @@ public class DialoguePanelSpawner : MonoBehaviour
 
     private void Update()
     {
+        if (!_gameManager.enableDialogueOptions)
+            return;
+        
+        // Move the panel to the correct position if the player is colliding with an npc
         if (_isColliding)
         {
             _panelPos.y = _NPCHipTransform.position.y + panelOffsetY;
@@ -45,17 +52,21 @@ public class DialoguePanelSpawner : MonoBehaviour
 
     private void EnableDialogueOptions()
     {
-        //"Spawn" the dialogue options at the current npc position
-        _panelPos = _npcCollision.GetCurrentNpc().transform.TransformPoint(panelOffsetX,panelOffsetY,panelOffsetZ);
+        // Only enable the dialogue options if VR is enabled
+        if (_gameManager.enableVR)
+        {
+            //"Spawn" the dialogue options at the current npc position
+            _panelPos = _npcCollision.GetCurrentNpc().transform.TransformPoint(panelOffsetX,panelOffsetY,panelOffsetZ);
 
-        //Make sure it is rotated correctly (So it faces the same direction as the npc)
-        gameObject.transform.rotation = _npcCollision.GetCurrentNpc().transform.rotation;
-        transform.Rotate(Vector3.up * -panelRotationY);
+            //Make sure it is rotated correctly (So it faces the same direction as the npc)
+            gameObject.transform.rotation = _npcCollision.GetCurrentNpc().transform.rotation;
+            transform.Rotate(Vector3.up * -panelRotationY);
 
-        _NPCHipTransform = _npcCollision.GetCurrentNpc().transform.GetChild(1).transform.GetChild(0).transform;
+            _NPCHipTransform = _npcCollision.GetCurrentNpc().transform.GetChild(1).transform.GetChild(0).transform;
 
-        _isColliding = true;
-        _panel.SetActive(true);
+            _isColliding = true;
+            _panel.SetActive(true);
+        }
     }
     
     private void DisableDialogueOptions()
