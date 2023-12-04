@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class NpcPersonality : MonoBehaviour
 {
-    //TODO Refine the prompts (Found in Assets/Prompts)
     
     [SerializeField] private string plotPrompt; //This prompt explains the plot and setup of the story to the NPC  
     [SerializeField] private string backstoryPrompt; //This prompt explains the unique backstory and personality of the NPC
@@ -17,6 +16,8 @@ public class NpcPersonality : MonoBehaviour
     public string backstoryPath = "Assets/Prompts/BackgroundPrompt1.txt";
     public string cluePrompt;
     public bool hasFoundFirstClue;
+
+    public GameManager gameManager;
 
     
     private readonly List<ChatMessage> _combinedMessages = new List<ChatMessage>();
@@ -31,11 +32,17 @@ public class NpcPersonality : MonoBehaviour
         systemPrompt = UpdateSystemPrompt();
         
         AddSystemPromptToList(systemPrompt);    
+        
+        if (gameManager == null)
+        {
+            gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        }
     }
 
 
     public string UpdateSystemPrompt()
     {
+        
         systemPrompt = "You are playing the role of a non-player character in the following context:\n" +
                        $"[{plotPrompt}]\n\n" +
                        "The following text is your Character Biography, and it describes what character you play, what they know and their relationships with the other characters:\n" +
@@ -51,9 +58,18 @@ public class NpcPersonality : MonoBehaviour
                        "6. Whenever you are asked a question, it is from Riley Anderson who is standing in front of you. You are to respond to her questions as if you are role-playing your character.\n" +
                        "7. Every statement enveloped by the syntax SECRET[] is a secret your character doesn't want others to know. DO NOT reveal any of these secrets!\n" +
                        "8. The current time is 06:00 AM.";
-        
+
+        if (gameManager.enableDialogueOptions)
+        {
+            systemPrompt +=
+                "9. Never provide a follow up answer in your response and never ask the player anything. Always just answer their question";
+        }
+
         return systemPrompt;
     }
+
+
+    
 
     private void AddSystemPromptToList(string sysPrompt)
     {
