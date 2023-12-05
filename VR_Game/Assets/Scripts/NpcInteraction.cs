@@ -116,7 +116,7 @@ public class NpcInteraction : MonoBehaviour
         ttsManager.startTTS(npcCollision.GetCurrentNpc(), gptResponse);
 
         _answerTime = DateTime.Now;
-        string processingTime = _answerTime.Subtract(_startRecordTime).ToString();
+        string processingTime = _answerTime.Subtract(_startRecordTime).TotalSeconds.ToString();
         allAnswerTimes.Append(processingTime);
         //Adds the npcResponse to the list of messages for ChatGPT API
         npcCollision.GetCurrentNpc().GetComponent<NpcPersonality>().AddNpcResponseToList(gptResponse);
