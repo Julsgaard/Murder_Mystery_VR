@@ -1,6 +1,8 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using System.IO;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -173,6 +175,25 @@ public class GameManager : MonoBehaviour
             nonPlayerObject.transform.position = new Vector3(-11.27f,-17.59f+1,-21.29f);
             nonPlayerObject.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
+        string path = Application.dataPath + "/answerTimes.txt";
+        int testID = 0;
+        string allAnswersByComma = "";
+        foreach (string answer in NpcInteraction.allAnswerTimes) { allAnswersByComma += (answer + ","); }
+        
+        if (!File.Exists(path))
+        {
+            allAnswersByComma += $"\n + {testID}";
+            File.WriteAllText(path,allAnswersByComma);
+        }
+        else
+        {
+            string[] allLines = File.ReadAllLines(path);
+            int[] a = allLines[allLines.Length - 1].Trim().ToIntArray();
+            testID = a[0];
+            allAnswersByComma += $"\n + {testID}";
+            File.AppendAllText(path,allAnswersByComma);
+        }
+
     }
     
     public string WinOrLose(string npcName)
