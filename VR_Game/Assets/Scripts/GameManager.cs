@@ -182,7 +182,7 @@ public class GameManager : MonoBehaviour
         
         if (!File.Exists(path))
         {
-            allAnswersByComma += $"\n + {testID}";
+            allAnswersByComma += $"\n{testID}\n";
             File.WriteAllText(path,allAnswersByComma);
         }
         else
