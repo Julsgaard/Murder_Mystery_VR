@@ -10,7 +10,7 @@ public class TeleportPlayer : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player has touched the button.");
+            //Debug.Log("Player has touched the button.");
             gameManager.TeleportPlayer();
         }
     }
