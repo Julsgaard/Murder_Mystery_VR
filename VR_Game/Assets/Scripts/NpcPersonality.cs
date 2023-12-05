@@ -12,8 +12,8 @@ public class NpcPersonality : MonoBehaviour
     [SerializeField] private string backstoryPrompt; //This prompt explains the unique backstory and personality of the NPC
     [SerializeField] private string systemPrompt;
     
-    public string plotPath = "Assets/Prompts/PlotPrompt.txt";
-    public string backstoryPath = "Assets/Prompts/BackgroundPrompt1.txt";
+    public TextAsset plotFile;
+    public TextAsset backstoryFile;
     public string cluePrompt;
     public bool hasFoundFirstClue;
 
@@ -24,8 +24,8 @@ public class NpcPersonality : MonoBehaviour
 
     private void Awake()
     {
-        plotPrompt = File.ReadAllText(plotPath);
-        backstoryPrompt = File.ReadAllText(backstoryPath);
+        //plotPrompt = File.ReadAllText(plotPath);
+        //backstoryPrompt = File.ReadAllText(backstoryPath);
         cluePrompt = "";
         hasFoundFirstClue = false;
         
@@ -36,6 +36,26 @@ public class NpcPersonality : MonoBehaviour
         if (gameManager == null)
         {
             gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        }
+
+        if (plotFile != null)
+        {
+            plotPrompt = plotFile.text;
+            //Debug.Log(plotPrompt);
+        }
+        else
+        {
+            Debug.Log("No file assigned to plotFile.");
+        }
+        
+        if (backstoryFile != null)
+        {
+            backstoryPrompt = backstoryFile.text;
+            //Debug.Log(backstoryPrompt);
+        }
+        else
+        {
+            Debug.Log("No file assigned to backstoryFile.");
         }
     }
 
