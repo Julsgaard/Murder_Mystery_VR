@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,7 +15,10 @@ public class NpcInteraction : MonoBehaviour
     private AudioClip _playerRecording; //Used to store the audio clip recorded by the player before sending it to OpenAI
     public bool isRecording;
     //private String _systemPrompt; //The final combined prompt to be sent to openAI
-    
+
+    private DateTime _startRecordTime;
+    private DateTime _answerTime;
+    public static List<string> allAnswerTimes = new List<string>();
 
     private void Start()
     {
@@ -89,7 +95,7 @@ public class NpcInteraction : MonoBehaviour
         // Transcribes the audio and get the text
         string playerResponse = await chatGPTManager.TranscribeAudioAndGetText(audio);
         Debug.Log($"Transcribed text: {playerResponse}");
-        
+        _startRecordTime = DateTime.Now;
         await GenerateNPCResponse(playerResponse);
     }
     
@@ -109,6 +115,9 @@ public class NpcInteraction : MonoBehaviour
         //Plays the TTS audio
         ttsManager.startTTS(npcCollision.GetCurrentNpc(), gptResponse);
 
+        _answerTime = DateTime.Now;
+        string processingTime = _answerTime.Subtract(_startRecordTime).ToString();
+        allAnswerTimes.Append(processingTime);
         //Adds the npcResponse to the list of messages for ChatGPT API
         npcCollision.GetCurrentNpc().GetComponent<NpcPersonality>().AddNpcResponseToList(gptResponse);
     }
