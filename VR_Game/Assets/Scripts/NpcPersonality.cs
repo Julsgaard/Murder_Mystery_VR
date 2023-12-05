@@ -62,7 +62,7 @@ public class NpcPersonality : MonoBehaviour
         if (gameManager.enableDialogueOptions)
         {
             systemPrompt +=
-                "9. Never provide a follow up answer in your response and never ask the player anything. Always just answer their question";
+                "\n9. Never provide a follow up answer in your response and never ask the player anything. Always just answer their question";
         }
 
         return systemPrompt;
