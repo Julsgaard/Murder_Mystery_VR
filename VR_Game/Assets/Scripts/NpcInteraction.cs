@@ -18,11 +18,12 @@ public class NpcInteraction : MonoBehaviour
 
     private DateTime _startRecordTime;
     private DateTime _answerTime;
-    public static List<string> allAnswerTimes = new List<string>();
+    public static List<string> allAnswerTimes;
 
     private void Start()
     {
         isRecording = false;
+        allAnswerTimes = new List<string>();
     }
 
     //Controls the logic whether the recording should be started or stopped
@@ -117,7 +118,7 @@ public class NpcInteraction : MonoBehaviour
 
         _answerTime = DateTime.Now;
         string processingTime = _answerTime.Subtract(_startRecordTime).TotalSeconds.ToString();
-        allAnswerTimes.Append(processingTime);
+        allAnswerTimes.Add(processingTime);
         //Adds the npcResponse to the list of messages for ChatGPT API
         npcCollision.GetCurrentNpc().GetComponent<NpcPersonality>().AddNpcResponseToList(gptResponse);
     }

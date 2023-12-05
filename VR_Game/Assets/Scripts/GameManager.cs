@@ -147,6 +147,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            gameTimer.StartTimer();
             // Moves the non-VR player to the correct position
             //nonPlayerObject.transform.position = new Vector3(-8.8f,5.4f+1,-19.0f);
             nonPlayerObject.transform.position = new Vector3(7.42f, 5.88f+1, -16.14f);
@@ -177,20 +178,20 @@ public class GameManager : MonoBehaviour
         }
         string path = Application.dataPath + "/answerTimes.txt";
         int testID = 0;
-        string allAnswersByComma = "";
-        foreach (string answer in NpcInteraction.allAnswerTimes) { allAnswersByComma += (answer + ","); }
+        string allAnswersByComma = "\n";
+        foreach (string answer in NpcInteraction.allAnswerTimes) { allAnswersByComma += (answer + "; "); }
         
         if (!File.Exists(path))
         {
-            allAnswersByComma += $"\n{testID}\n";
+            allAnswersByComma += $"\n{testID}";
             File.WriteAllText(path,allAnswersByComma);
         }
         else
         {
             string[] allLines = File.ReadAllLines(path);
-            int[] a = allLines[allLines.Length - 1].Trim().ToIntArray();
-            testID = a[0];
-            allAnswersByComma += $"\n{testID}\n";
+            int a = int.Parse(allLines[allLines.Length - 1]);
+            testID = a+1;
+            allAnswersByComma += $"\n{testID}";
             File.AppendAllText(path,allAnswersByComma);
         }
 
