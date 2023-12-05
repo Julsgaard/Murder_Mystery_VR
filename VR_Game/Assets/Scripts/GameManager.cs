@@ -190,7 +190,7 @@ public class GameManager : MonoBehaviour
             string[] allLines = File.ReadAllLines(path);
             int[] a = allLines[allLines.Length - 1].Trim().ToIntArray();
             testID = a[0];
-            allAnswersByComma += $"\n + {testID}";
+            allAnswersByComma += $"\n{testID}\n";
             File.AppendAllText(path,allAnswersByComma);
         }
 
