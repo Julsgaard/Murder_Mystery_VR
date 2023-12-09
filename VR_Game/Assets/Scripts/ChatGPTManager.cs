@@ -10,7 +10,7 @@ public class ChatGPTManager : MonoBehaviour
     
     
     //private OpenAIApi openAI = new OpenAIApi();
-    private OpenAIApi openAI = new OpenAIApi("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");
+    private OpenAIApi openAI = new OpenAIApi("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");
     
     
     public async Task<string> AskChatGPT(List<ChatMessage> combinedMessages)
