@@ -33,9 +33,10 @@ public class ClueObject : MonoBehaviour
         }
     }
 
-    // When the player enters the trigger collider, add the clue description to the NPC's system prompt
+    //When the player collides with the clue, add the clue description to the NPC's system prompt
     private void OnCollisionEnter(Collision collision)
     {
+        // Check if the player has collided with the clue and that the clue has not been found yet
         if (collision.collider.CompareTag("Player") && !isFound)
         {
             Debug.Log($"Player found clue: {gameObject.name}");
@@ -43,26 +44,32 @@ public class ClueObject : MonoBehaviour
             // Stop the particle system when the clue is found
             clueParticles.Stop();
 
-            // For each NPC in npcDescriptions, add the clue description to their system prompt
+            // For each NPC in the class npcDescriptions, add the clue description to their system prompt
             foreach (var npcDescription in npcDescriptions)
             {
                 NpcPersonality npcPersonality = npcDescription.npc.GetComponent<NpcPersonality>();
-
+                
+                // If this is the first clue found, set the clue prompt to an empty string (to remove the default clue prompt "No objects found yet.")
                 if (!npcPersonality.hasFoundFirstClue)
                 {
                     npcPersonality.cluePrompt = "";
                     npcPersonality.hasFoundFirstClue = true;
                 }
-
+                
+                // Add the clue description to the clue prompt
                 npcPersonality.cluePrompt += _counter + ". " + npcDescription.description + "\n";
 
+                // Update the system prompt
                 string systemPrompt = npcPersonality.UpdateSystemPrompt();
 
+                // Update the system prompt list
                 npcPersonality.UpdateSystemPromptList(systemPrompt);
             }
-
+            // Increase the counter
             _counter++;
+            // Set isFound to true
             isFound = true;
+            // Update the dialogue option buttons
             buttonScript.updateClueList(gameObject);
         }
     }
