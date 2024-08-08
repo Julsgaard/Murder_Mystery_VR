@@ -15,7 +15,7 @@ The NPCs use GPT4 to generate responses. This requires an API key to work, which
 Finally, the NPCs use the LMNT package for text to speech. This also requires an API key which can be generated and placed within the LMNT tab located in the top of the Unity window. 
 
 ### ISSUE WITH OPENAI PACKAGE
-Due to a change in the Unity package we use to integrate OpenAI in our project, you might need to change line 177 in the OpenAIApi scripts (Packages/OpenAI Unity/Runtime) from this:
+Due to a change in the Unity package we use to integrate OpenAI in our project, you might need to change line 177 in the OpenAIApi script (Located at "Packages/OpenAI Unity/Runtime") from this:
 data = JsonConvert.DeserializeObject<T>(request.downloadHandler.text, jsonSerializerSettings);
 To this:
 data = JsonConvert.DeserializeObject<T>(request.downloadHandler.text);
