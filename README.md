@@ -22,7 +22,7 @@ The player can gather information mainly through two ways:
 
 The game does not offer a way to win and/or guess the culprit and simply ends after the 15 minutes have passed.
 
-
+[!IMPORTANT]
 ISSUE:
 Due to a change in the Unity package we use to integrate OpenAI in our project, you might need to change line 177 in the OpenAIApi scripts (Packages/OpenAI Unity/Runtime) from this:
 data = JsonConvert.DeserializeObject<T>(request.downloadHandler.text, jsonSerializerSettings);
