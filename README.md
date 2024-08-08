@@ -17,7 +17,9 @@ Finally, the NPCs use the LMNT package for text to speech. This also requires an
 ### ISSUE WITH OPENAI PACKAGE
 Due to a change in the Unity package we use to integrate OpenAI in our project, you might need to change line 177 in the OpenAIApi script (Located at "Packages/OpenAI Unity/Runtime") from this:
 > data = JsonConvert.DeserializeObject<T>(request.downloadHandler.text, jsonSerializerSettings);
+
 To this:
+
 > data = JsonConvert.DeserializeObject<T>(request.downloadHandler.text);
 
 
