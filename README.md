@@ -31,6 +31,13 @@ To this:
 data = JsonConvert.DeserializeObject<T>(request.downloadHandler.text);
 
 
-## SPOILERS FOR THE GAME:
-There are in total 
-The true culprit of the game is Jens. 
+## Spoilers for the game:
+The true culprit of the game is Jens and his motive was jealousy. 
+
+There are in total 5 clues to be found throughout the mansion:
+- Doll (Located where Chris' body is found): Used by Jens to frame Leonard for the murder.
+- Letter (Located in the drawer found in Quinn's room): A love letter written by Jens adressed to Quinn.
+- Vase (Located in Ashley's room): Tells the player of the argument Chris and Ashley had.
+- Knife (Located in the drawer found in Jens' room): The weapon Jens used to kill Chris.
+- Pot (Located in the kitchen): By turning this pot around, a bloody handprint from Jens hand can be found. 
+
