@@ -14,6 +14,13 @@ The NPCs use GPT4 to generate responses. This requires an API key to work, which
 
 Finally, the NPCs use the LMNT package for text to speech. This also requires an API key which can be generated and placed within the LMNT tab located in the top of the Unity window. 
 
+### ISSUE:
+Due to a change in the Unity package we use to integrate OpenAI in our project, you might need to change line 177 in the OpenAIApi scripts (Packages/OpenAI Unity/Runtime) from this:
+data = JsonConvert.DeserializeObject<T>(request.downloadHandler.text, jsonSerializerSettings);
+To this:
+data = JsonConvert.DeserializeObject<T>(request.downloadHandler.text);
+
+
 ## Game Guide:
 Upon starting the game, the player is placed in a tutorial room that explanis the setup of the murder mystery, as well as the controls of the game.
 The room can be excited by pressing the button located beneath the intro text. Upon exiting, the player is placed in a mansion and now has 15 minutes to figure out the culprit behind the murder (Remaining time can be seen by looking at the watch attached to the players right wrist.) 
@@ -22,14 +29,6 @@ The player can gather information mainly through two ways:
 - Gathering clues located through the mansion. These clues can be distinguised from other objects as they are highlighted with particle effects and can be picked up. Upon having interacted with a clue, the player can now ask questions about this clue to NPCs.
 
 The game does not offer a way to win and/or guess the culprit and simply ends after the 15 minutes have passed.
-
-
-## ISSUE:
-Due to a change in the Unity package we use to integrate OpenAI in our project, you might need to change line 177 in the OpenAIApi scripts (Packages/OpenAI Unity/Runtime) from this:
-data = JsonConvert.DeserializeObject<T>(request.downloadHandler.text, jsonSerializerSettings);
-To this:
-data = JsonConvert.DeserializeObject<T>(request.downloadHandler.text);
-
 
 ## Spoilers for the game:
 The true culprit of the game is Jens and his motive was jealousy. 
