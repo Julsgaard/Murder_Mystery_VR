@@ -1,7 +1,5 @@
 ## Setup
-The project was developed and tested for Unity version 2022.3.9f1
-
-The game is meant to be played using a VR headset connected to Unity. While developing and testing, we used the Oculus Quest 2 headset.
+This game was developed and tested for Unity version 2022.3.9f1 and is meant to be played using a VR headset connected to Unity. While developing and testing, we used the Oculus Quest 2 headset.
 
 While playing the game, the player can interact with NPCs through two ways:
 1. Talking to them through speech recognition. This is done by being within proximity of an NPC and holding down the X button on the VR controller while talking, and releasing the button upon finishing talking.
