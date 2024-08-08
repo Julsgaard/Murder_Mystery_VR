@@ -13,7 +13,7 @@
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "3.2.1"
       },
-      "hash": "5257a6f7e1e3c944fd6d8e1f668b33853d4890fa"
+      "hash": "95503471ac85848ba0d85b597419b1303fbb2c01"
     },
     "com.unity.animation.rigging": {
       "version": "1.2.1",
