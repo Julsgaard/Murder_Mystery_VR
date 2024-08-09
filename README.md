@@ -34,3 +34,10 @@ There are in total 5 clues to be found throughout the mansion:
 - Knife (Located in the drawer found in Jens' room): The weapon Jens used to kill Chris.
 - Pot (Located in the kitchen): By turning this pot around, a bloody handprint from Jens hand can be found. 
 </details>
+
+## Data from our usertest
+The captured user study data in Excel format is also available in the repository. 
+It is separated into three main sheets 
+- Questionnaire data
+- Open Question Responses
+- Murderer guesses
